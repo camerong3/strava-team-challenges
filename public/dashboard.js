@@ -1,3 +1,5 @@
+const backendUrl = 'https://your-project-name.vercel.app';  // Replace with your actual Vercel URL
+
 document.addEventListener('DOMContentLoaded', () => {
   const athlete = JSON.parse(localStorage.getItem('strava_athlete'));
   const token = localStorage.getItem('strava_access_token');
@@ -21,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     displayActivities(cachedActivities);
   } else {
     // Fetch new data
-    console.log('Fetching new activities from Strava');
     fetchActivities(token);
   }
 
@@ -29,30 +30,80 @@ document.addEventListener('DOMContentLoaded', () => {
   const refreshButton = document.getElementById('refresh-activities');
   if (refreshButton) {
     refreshButton.addEventListener('click', () => {
-      console.log('Manual refresh triggered');  // Add this log to verify the button works
+      console.log('Manual refresh triggered');
       fetchActivities(token); // Force fetch new data
     });
   } else {
     console.error('Refresh button not found');
   }
+
+  // Handle challenge creation
+  const challengeForm = document.getElementById('create-challenge-form');
+  if (challengeForm) {
+    challengeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const challengeName = document.getElementById('challenge-name').value;
+      const challengeType = document.getElementById('challenge-type').value;
+      const challengeMode = document.getElementById('challenge-mode').value;
+      const activityType = document.getElementById('activity-type').value;
+      const createdBy = athlete.id;
+
+      const response = await fetch(`${backendUrl}/api/challenges`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: challengeName,
+          type: challengeType,
+          mode: challengeMode,
+          activityType: activityType,
+          createdBy: createdBy
+        })
+      });
+
+      const data = await response.json();
+      console.log('Challenge created with ID:', data.id);
+    });
+  }
+
+  // Handle joining a challenge
+  const joinChallengeForm = document.getElementById('join-challenge-form');
+  if (joinChallengeForm) {
+    joinChallengeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const challengeId = document.getElementById('challenge-id').value;
+      const userId = athlete.id;
+
+      const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/join`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: userId })
+      });
+
+      if (response.ok) {
+        console.log('Joined challenge:', challengeId);
+      } else {
+        console.error('Failed to join challenge');
+      }
+    });
+  }
+
+  fetchChallenges();  // Load and display all challenges
 });
 
-function fetchActivities(token) {
-  fetch('https://www.strava.com/api/v3/athlete/activities', {
+async function fetchActivities(token) {
+  console.log('Fetching new activities from Strava');
+  const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
-  })
-  .then(response => response.json())
-  .then(activities => {
-    // Cache the activities and the time they were fetched
-    localStorage.setItem('strava_activities', JSON.stringify(activities));
-    localStorage.setItem('strava_activities_cache_time', Date.now());
-    displayActivities(activities);
-  })
-  .catch(error => {
-    console.error('Error fetching activities:', error);
   });
+  const activities = await response.json();
+  // Cache the activities and the time they were fetched
+  localStorage.setItem('strava_activities', JSON.stringify(activities));
+  localStorage.setItem('strava_activities_cache_time', Date.now());
+  displayActivities(activities);
 }
 
 function displayActivities(activities) {
@@ -64,5 +115,22 @@ function displayActivities(activities) {
     const listItem = document.createElement('li');
     listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
     activitiesList.appendChild(listItem);
+  });
+}
+
+async function fetchChallenges() {
+  const response = await fetch(`${backendUrl}/api/challenges`);
+  const challenges = await response.json();
+  displayChallenges(challenges);
+}
+
+function displayChallenges(challenges) {
+  const challengesList = document.getElementById('challenges-list');
+  challengesList.innerHTML = '';
+
+  challenges.forEach(challenge => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${challenge.name} - ${challenge.type} (${challenge.mode}) - ${challenge.activityType}`;
+    challengesList.appendChild(listItem);
   });
 }
