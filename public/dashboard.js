@@ -65,8 +65,9 @@ function displayActivities(activities) {
   activitiesList.innerHTML = '';
 
   activities.forEach(activity => {
+    const distanceInMiles = (activity.distance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
     const listItem = document.createElement('li');
-    listItem.textContent = `${activity.name} - ${activity.distance / 1000} km`;
+    listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
     activitiesList.appendChild(listItem);
   });
 }
