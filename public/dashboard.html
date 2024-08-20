@@ -10,6 +10,24 @@
   <img id="athlete-photo" src="" alt="Profile Photo">
   <p>City: <span id="athlete-city"></span></p>
   <p>State: <span id="athlete-state"></span></p>
-  <script src="src/dashboard.js"></script>
+
+  <h2>Recent Activities</h2>
+  <ul id="activities-list"></ul>
+
+  <!-- Include the main JavaScript file -->
+  <script src="dashboard.js"></script>
+
+  <!-- Register the service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/serviceWorker.js')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+    }
+  </script>
 </body>
 </html>

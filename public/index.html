@@ -10,6 +10,21 @@
   <h1>Strava Challenge Tracker</h1>
   <p id="status-message">Checking login status...</p>
   <button id="strava-signin" style="display:none;">Sign in with Strava</button>
-  <script src="src/index.js"></script>
+  
+  <!-- Include the main JavaScript file -->
+  <script src="index.js"></script>
+
+  <!-- Register the service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/serviceWorker.js')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+    }
+  </script>
 </body>
 </html>
