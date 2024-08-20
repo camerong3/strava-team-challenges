@@ -1,4 +1,4 @@
-const backendUrl = 'https://strava-challenge-backend.vercel.app/';  // Replace with your actual Vercel URL
+const backendUrl = 'https://strava-challenge-backend.vercel.app';  // Replace with your actual Vercel URL
 
 document.addEventListener('DOMContentLoaded', () => {
   const athlete = JSON.parse(localStorage.getItem('strava_athlete'));
