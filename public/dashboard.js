@@ -26,9 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Add a button for the user to manually refresh data
-  document.getElementById('refresh-activities').addEventListener('click', () => {
-    fetchActivities(token); // Force fetch new data
-  });
+  const refreshButton = document.getElementById('refresh-activities');
+  if (refreshButton) {
+    refreshButton.addEventListener('click', () => {
+      console.log('Manual refresh triggered');  // Add this log to verify the button works
+      fetchActivities(token); // Force fetch new data
+    });
+  } else {
+    console.error('Refresh button not found');
+  }
 });
 
 function fetchActivities(token) {
