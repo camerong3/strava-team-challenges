@@ -27,22 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add a button for the user to manually refresh data
   document.getElementById('refresh-activities').addEventListener('click', () => {
-    fetchActivities(token, true); // Force fetch new data
+    fetchActivities(token); // Force fetch new data
   });
 });
 
-function fetchActivities(token, force = false) {
-  if (!force) {
-    // Check cache before fetching
-    const cacheTime = localStorage.getItem('strava_activities_cache_time');
-    const cacheDuration = 1000 * 60 * 60 * 24; // Cache for 24 hours
-    if (cacheTime && (Date.now() - cacheTime < cacheDuration)) {
-      const cachedActivities = JSON.parse(localStorage.getItem('strava_activities'));
-      displayActivities(cachedActivities);
-      return;
-    }
-  }
-
+function fetchActivities(token) {
   fetch('https://www.strava.com/api/v3/athlete/activities', {
     headers: {
       'Authorization': `Bearer ${token}`
