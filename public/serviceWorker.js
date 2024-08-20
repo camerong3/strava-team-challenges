@@ -6,6 +6,7 @@ const urlsToCache = [
   '/manifest.json',
   '/index.js',
   '/dashboard.js',
+  '/challenge-dashboard.html',
   '/serviceWorker.js',
   '/icon.png' // Add your app icon here
 ];

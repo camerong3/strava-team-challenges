@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge Dashboard</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if needed -->
+</head>
+<body>
+  <header>
+    <h1 id="challenge-name">Challenge Dashboard</h1>
+    <p id="challenge-details"></p>
+  </header>
+
+  <section>
+    <h2>Leaderboard</h2>
+    <ul id="leaderboard">
+      <!-- Leaderboard entries will be dynamically inserted here -->
+    </ul>
+  </section>
+
+  <footer>
+    <button id="refresh-leaderboard">Refresh Leaderboard</button>
+  </footer>
+
+  <script src="dashboard.js"></script> <!-- Link to your dashboard.js file -->
+  <script>
+    // Get challenge ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeId = urlParams.get('id');
+
+    // Fetch and display the challenge details and leaderboard
+    async function loadChallengeDashboard() {
+      const response = await fetch(`${backendUrl}/api/challenges/${challengeId}`);
+      const challenge = await response.json();
+
+      // Display challenge name and details
+      document.getElementById('challenge-name').textContent = challenge.name;
+      document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityType} - ${challenge.mode}`;
+
+      // Fetch and display leaderboard
+      displayLeaderboard(challengeId);
+    }
+
+    document.getElementById('refresh-leaderboard').addEventListener('click', () => {
+      displayLeaderboard(challengeId);
+    });
+
+    loadChallengeDashboard(); // Load the dashboard on page load
+  </script>
+</body>
+</html>

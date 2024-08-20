@@ -21,9 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Using cached activities');
     const cachedActivities = JSON.parse(localStorage.getItem('strava_activities'));
     displayActivities(cachedActivities);
+    uploadActivities(athlete.id, cachedActivities);  // Upload cached activities to backend
   } else {
     // Fetch new data
-    fetchActivities(token);
+    fetchActivities(token).then(activities => {
+      uploadActivities(athlete.id, activities);  // Upload new activities to backend
+    });
   }
 
   // Add a button for the user to manually refresh data
@@ -31,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (refreshButton) {
     refreshButton.addEventListener('click', () => {
       console.log('Manual refresh triggered');
-      fetchActivities(token); // Force fetch new data
+      fetchActivities(token).then(activities => {
+        uploadActivities(athlete.id, activities);  // Force upload new activities to backend
+      });
     });
   } else {
     console.error('Refresh button not found');
@@ -63,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await response.json();
       console.log('Challenge created with ID:', data.id);
+      // Redirect to the challenge dashboard after creating the challenge
+      window.location.href = `/challenge-dashboard.html?id=${data.id}`;
     });
   }
 
@@ -83,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         console.log('Joined challenge:', challengeId);
+        // Redirect to the challenge dashboard after joining
+        window.location.href = `/challenge-dashboard.html?id=${challengeId}`;
       } else {
         console.error('Failed to join challenge');
       }
@@ -104,6 +113,7 @@ async function fetchActivities(token) {
   localStorage.setItem('strava_activities', JSON.stringify(activities));
   localStorage.setItem('strava_activities_cache_time', Date.now());
   displayActivities(activities);
+  return activities;
 }
 
 function displayActivities(activities) {
@@ -132,5 +142,29 @@ function displayChallenges(challenges) {
     const listItem = document.createElement('li');
     listItem.textContent = `${challenge.name} - ${challenge.type} (${challenge.mode}) - ${challenge.activityType}`;
     challengesList.appendChild(listItem);
+  });
+}
+
+async function uploadActivities(userId, activities) {
+  await fetch(`${backendUrl}/api/users/${userId}/activities`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ activities }),
+  });
+}
+
+async function displayLeaderboard(challengeId) {
+  const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/leaderboard`);
+  const data = await response.json();
+
+  const leaderboardContainer = document.getElementById('leaderboard');
+  leaderboardContainer.innerHTML = '';  // Clear previous leaderboard
+
+  data.leaderboard.forEach(entry => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${entry.participant}: ${(entry.totalDistance / 1000).toFixed(2)} km`;  // Convert meters to kilometers
+    leaderboardContainer.appendChild(listItem);
   });
 }
