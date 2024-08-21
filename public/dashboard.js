@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('athlete-photo').src = athlete.profile_medium;
     document.getElementById('athlete-city').textContent = athlete.city;
     document.getElementById('athlete-state').textContent = athlete.state;
+
+    // Fetch and display user groups
+    fetchAndDisplayUserGroups(athlete.id);
   } else {
     // Redirect to login if no athlete data is found
     window.location.href = '/';
@@ -95,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         console.log('Joined challenge:', challengeId);
+        // Refresh the user's groups after joining a challenge
+        fetchAndDisplayUserGroups(userId);
         // Redirect to the challenge dashboard after joining
         window.location.href = `/challenge-dashboard.html?id=${challengeId}`;
       } else {
@@ -172,4 +177,26 @@ async function displayLeaderboard(challengeId) {
     listItem.textContent = `${entry.participant}: ${(entry.totalDistance / 1000).toFixed(2)} km`;  // Convert meters to kilometers
     leaderboardContainer.appendChild(listItem);
   });
+}
+
+async function fetchAndDisplayUserGroups(userId) {
+  try {
+    const response = await fetch(`${backendUrl}/api/users/${userId}/groups`);
+    const data = await response.json();
+
+    const groupsList = document.getElementById('user-groups-list');
+    groupsList.innerHTML = ''; // Clear the list first
+
+    if (data.groups.length === 0) {
+      groupsList.textContent = 'You are not participating in any groups.';
+    } else {
+      data.groups.forEach(groupId => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Challenge ID: ${groupId}`;
+        groupsList.appendChild(listItem);
+      });
+    }
+  } catch (error) {
+    console.error('Error fetching user groups:', error);
+  }
 }
