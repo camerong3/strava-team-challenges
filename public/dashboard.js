@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const activityType = document.getElementById('activity-type').value;
       const createdBy = athlete.id;
 
+      // After successfully creating a challenge
       const response = await fetch(`${backendUrl}/api/challenges`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -68,6 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await response.json();
       console.log('Challenge created with ID:', data.id);
+
+      // Store the challenge ID in localStorage
+      localStorage.setItem('challengeId', data.id);
+
       // Redirect to the challenge dashboard after creating the challenge
       window.location.href = `/challenge-dashboard.html?id=${data.id}`;
     });
