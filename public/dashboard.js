@@ -170,7 +170,7 @@ async function displayLeaderboard(challengeId) {
     data.leaderboard.forEach(entry => {
       const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
       const listItem = document.createElement('li');
-      listItem.textContent = `${entry.firstname}: ${distanceInMiles} miles`;
+      listItem.textContent = `${entry.firstname} ${entry.lastname}: ${distanceInMiles} miles`;
       leaderboardContainer.appendChild(listItem);
     });
   } catch (error) {
