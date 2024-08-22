@@ -1,0 +1,45 @@
+#login-image {
+    width: 100%;
+    max-width: 200px; /* Adjust size as needed */
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+  }
+
+  .leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px;
+  }
+  
+  .leaderboard-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .leaderboard-list li:nth-child(odd) {
+    background-color: #e9e9e9;
+  }
+  
+  .leaderboard-list li span.name {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .leaderboard-list li span.distance {
+    color: #555;
+  }
+
+  .footer-image {
+    width: 100%;
+    max-width: 300px; /* Adjust size as needed */
+    display: block;
+    margin: 20px auto;
+  }
+    

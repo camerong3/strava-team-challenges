@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Strava Challenge Tracker</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if needed -->
 </head>
 <body>
   <h1>Strava Challenge Tracker</h1>
   <p id="status-message">Checking login status...</p>
-  <button id="strava-signin" style="display:none;">Sign in with Strava</button>
-  
+  <!-- Replace the existing login button with this image -->
+  <a href="/login" id="login-button">
+    <img src="login_button.png" alt="Login" id="login-image" />
+  </a>
+
   <!-- Include the main JavaScript file -->
   <script src="index.js"></script>
 
@@ -26,5 +30,10 @@
       });
     }
   </script>
+
+  <!-- Add this at the end of your HTML structure, before the closing body tag -->
+  <footer>
+    <img src="footer_img.png" alt="Footer Image" class="footer-image" />
+  </footer>
 </body>
 </html>
