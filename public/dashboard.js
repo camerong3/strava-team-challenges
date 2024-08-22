@@ -162,18 +162,38 @@ async function uploadActivities(userId, activities) {
 async function displayLeaderboard(challengeId) {
   try {
     const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/leaderboard`);
+    
+    // Debug: Check if the response is OK
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
     const data = await response.json();
 
+    // Debug: Log the data received from the backend
+    console.log("Leaderboard data received:", data);
+
     const leaderboardContainer = document.getElementById('leaderboard');
+
+    // Debug: Check if leaderboardContainer exists
+    if (!leaderboardContainer) {
+      throw new Error("Element with ID 'leaderboard' not found in the DOM");
+    }
+
     leaderboardContainer.innerHTML = '';  // Clear previous leaderboard
 
-    data.leaderboard.forEach(entry => {
-      const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
-      const listItem = document.createElement('li');
-      listItem.textContent = `${entry.firstname}: ${distanceInMiles} miles`;
-      leaderboardContainer.appendChild(listItem);
-    });
+    if (data.leaderboard.length === 0) {
+      leaderboardContainer.textContent = 'No leaderboard data available.';
+    } else {
+      data.leaderboard.forEach(entry => {
+        const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
+        const listItem = document.createElement('li');
+        listItem.textContent = `${entry.firstname}: ${distanceInMiles} miles`;
+        leaderboardContainer.appendChild(listItem);
+      });
+    }
   } catch (error) {
+    // Debug: Log any errors encountered
     console.error('Error fetching leaderboard:', error);
   }
 }
