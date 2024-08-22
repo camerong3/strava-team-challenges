@@ -190,11 +190,14 @@ async function fetchAndDisplayUserGroups(userId) {
     if (data.groups.length === 0) {
       groupsList.textContent = 'You are not participating in any groups.';
     } else {
-      data.groups.forEach(groupId => {
+      for (const groupId of data.groups) {
+        const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
+        const groupData = await groupResponse.json();
+        
         const listItem = document.createElement('li');
-        listItem.textContent = `Challenge ID: ${groupId}`;
+        listItem.textContent = `${groupData.name} - ${groupData.type} (${groupData.mode})`;
         groupsList.appendChild(listItem);
-      });
+      }
     }
   } catch (error) {
     console.error('Error fetching user groups:', error);
