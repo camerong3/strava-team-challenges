@@ -107,8 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-  fetchChallenges();  // Load and display all challenges
 });
 
 async function fetchActivities(token) {
@@ -135,27 +133,6 @@ function displayActivities(activities) {
     const listItem = document.createElement('li');
     listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
     activitiesList.appendChild(listItem);
-  });
-}
-
-async function fetchChallenges() {
-  try {
-    const response = await fetch(`${backendUrl}/api/challenges`);
-    const challenges = await response.json();
-    displayChallenges(challenges);
-  } catch (error) {
-    console.error('Error fetching challenges:', error);
-  }
-}
-
-function displayChallenges(challenges) {
-  const challengesList = document.getElementById('challenges-list');
-  challengesList.innerHTML = '';
-
-  challenges.forEach(challenge => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${challenge.name} - ${challenge.type} (${challenge.mode}) - ${challenge.activityType}`;
-    challengesList.appendChild(listItem);
   });
 }
 
@@ -203,7 +180,7 @@ async function fetchAndDisplayUserGroups(userId) {
         const groupData = await groupResponse.json();
 
         const listItem = document.createElement('li');
-        listItem.textContent = `${groupData.name} - ${groupId}`;
+        listItem.textContent = `${groupData.name}`;
         groupsList.appendChild(listItem);
       }
     }
