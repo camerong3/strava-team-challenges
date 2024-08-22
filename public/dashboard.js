@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const challengeMode = document.getElementById('challenge-mode').value;
       const activityType = document.getElementById('activity-type').value;
       const createdBy = athlete.id;
+      const firstname = athlete.firstname; // Retrieve first name
+      const lastname = athlete.lastname;   // Retrieve last name
 
       // After successfully creating a challenge
       const response = await fetch(`${backendUrl}/api/challenges`, {
@@ -68,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
           type: challengeType,
           mode: challengeMode,
           activityType: activityType,
-          createdBy: createdBy
+          createdBy: createdBy,
+          firstname: firstname,
+          lastname: lastname
         })
       });
 
@@ -91,11 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const challengeId = document.getElementById('challenge-id').value;
       const userId = athlete.id;
+      const firstname = athlete.firstname; // Retrieve first name
+      const lastname = athlete.lastname;   // Retrieve last name
 
       const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: userId })
+        body: JSON.stringify({ userId: userId, firstname: firstname, lastname: lastname })
       });
 
       if (response.ok) {
