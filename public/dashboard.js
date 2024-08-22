@@ -128,14 +128,19 @@ async function fetchActivities(token) {
 
 function displayActivities(activities) {
   const activitiesList = document.getElementById('activities-list');
-  activitiesList.innerHTML = '';
+  
+  if (activitiesList) {  // Check if the element exists
+    activitiesList.innerHTML = '';
 
-  activities.forEach(activity => {
-    const distanceInMiles = (activity.distance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
-    const listItem = document.createElement('li');
-    listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
-    activitiesList.appendChild(listItem);
-  });
+    activities.forEach(activity => {
+      const distanceInMiles = (activity.distance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
+      const listItem = document.createElement('li');
+      listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
+      activitiesList.appendChild(listItem);
+    });
+  } else {
+    console.warn('Element with id "activities-list" not found on this page.');
+  }
 }
 
 async function uploadActivities(userId, activities) {
