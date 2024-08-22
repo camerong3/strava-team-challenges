@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cacheTime = localStorage.getItem('strava_activities_cache_time');
   const cacheDuration = 1000 * 60 * 60 * 24; // Cache for 24 hours
 
-  if (window.location.pathname.includes('dashboard.html')) {
+  if (!window.location.pathname.incldue('challenge-dashboard.html')) {
     if (athlete) {
       document.getElementById('athlete-name').textContent = `${athlete.firstname} ${athlete.lastname}`;
       document.getElementById('athlete-photo').src = athlete.profile_medium;
