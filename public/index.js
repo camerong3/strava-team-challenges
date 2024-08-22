@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Create a new image element for login
     const loginImage = document.createElement('img');
-    loginImage.src = 'path/to/your/image.png'; // Replace with the path to your image
+    loginImage.src = '/login_button.png'; // Replace with the path to your image
     loginImage.alt = 'Sign in with Strava';
     loginImage.style.cursor = 'pointer';
     loginImage.id = 'strava-signin';
