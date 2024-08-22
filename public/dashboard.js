@@ -6,17 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const cacheTime = localStorage.getItem('strava_activities_cache_time');
   const cacheDuration = 1000 * 60 * 60 * 24; // Cache for 24 hours
 
-  if (athlete) {
-    document.getElementById('athlete-name').textContent = `${athlete.firstname} ${athlete.lastname}`;
-    document.getElementById('athlete-photo').src = athlete.profile_medium;
-    document.getElementById('athlete-city').textContent = athlete.city;
-    document.getElementById('athlete-state').textContent = athlete.state;
+  if (window.location.pathname.includes('dashboard.html')) {
+    if (athlete) {
+      document.getElementById('athlete-name').textContent = `${athlete.firstname} ${athlete.lastname}`;
+      document.getElementById('athlete-photo').src = athlete.profile_medium;
+      document.getElementById('athlete-city').textContent = athlete.city;
+      document.getElementById('athlete-state').textContent = athlete.state;
 
-    // Fetch and display user groups
-    fetchAndDisplayUserGroups(athlete.id);
-  } else {
-    // Redirect to login if no athlete data is found
-    window.location.href = '/';
+      // Fetch and display user groups
+      fetchAndDisplayUserGroups(athlete.id);
+    } else {
+      // Redirect to login if no athlete data is found
+      window.location.href = '/';
+    }
   }
 
   if (cacheTime && (Date.now() - cacheTime < cacheDuration)) {
