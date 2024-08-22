@@ -37,9 +37,11 @@
   }
 
   .footer-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     width: 100%;
-    max-width: 300px; /* Adjust size as needed */
+    max-width: 175px; /* Adjust size as needed */
     display: block;
-    margin: 20px auto;
+    margin: 10px 10px;
   }
-    
