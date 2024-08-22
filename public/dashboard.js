@@ -57,30 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const activityType = document.getElementById('activity-type').value;
       const createdBy = athlete.id;
 
-      try {
-        const response = await fetch(`${backendUrl}/api/challenges`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: challengeName,
-            type: challengeType,
-            mode: challengeMode,
-            activityType: activityType,
-            createdBy: createdBy
-          })
-        });
+      // After successfully creating a challenge
+      const response = await fetch(`${backendUrl}/api/challenges`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: challengeName,
+          type: challengeType,
+          mode: challengeMode,
+          activityType: activityType,
+          createdBy: createdBy
+        })
+      });
 
-        const data = await response.json();
-        console.log('Challenge created with ID:', data.id);
+      const data = await response.json();
+      console.log('Challenge created with ID:', data.id);
 
-        // Store the challenge ID in localStorage
-        localStorage.setItem('challengeId', data.id);
+      // Store the challenge ID in localStorage
+      localStorage.setItem('challengeId', data.id);
 
-        // Redirect to the challenge dashboard after creating the challenge
-        window.location.href = `/challenge-dashboard.html?id=${data.id}`;
-      } catch (error) {
-        console.error('Error creating challenge:', error);
-      }
+      // Redirect to the challenge dashboard after creating the challenge
+      window.location.href = `/challenge-dashboard.html?id=${data.id}`;
     });
   }
 
@@ -93,24 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const challengeId = document.getElementById('challenge-id').value;
       const userId = athlete.id;
 
-      try {
-        const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/join`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: userId })
-        });
+      const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/join`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: userId })
+      });
 
-        if (response.ok) {
-          console.log('Joined challenge:', challengeId);
-          // Refresh the user's groups after joining a challenge
-          fetchAndDisplayUserGroups(userId);
-          // Redirect to the challenge dashboard after joining
-          window.location.href = `/challenge-dashboard.html?id=${challengeId}`;
-        } else {
-          console.error('Failed to join challenge');
-        }
-      } catch (error) {
-        console.error('Error joining challenge:', error);
+      if (response.ok) {
+        console.log('Joined challenge:', challengeId);
+        // Refresh the user's groups after joining a challenge
+        fetchAndDisplayUserGroups(userId);
+        // Redirect to the challenge dashboard after joining
+        window.location.href = `/challenge-dashboard.html?id=${challengeId}`;
+      } else {
+        console.error('Failed to join challenge');
       }
     });
   }
@@ -120,22 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchActivities(token) {
   console.log('Fetching new activities from Strava');
-  try {
-    const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    const activities = await response.json();
-    // Cache the activities and the time they were fetched
-    localStorage.setItem('strava_activities', JSON.stringify(activities));
-    localStorage.setItem('strava_activities_cache_time', Date.now());
-    displayActivities(activities);
-    return activities;
-  } catch (error) {
-    console.error('Failed to fetch activities from Strava:', error);
-    return [];
-  }
+  const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  const activities = await response.json();
+  // Cache the activities and the time they were fetched
+  localStorage.setItem('strava_activities', JSON.stringify(activities));
+  localStorage.setItem('strava_activities_cache_time', Date.now());
+  displayActivities(activities);
+  return activities;
 }
 
 function displayActivities(activities) {
@@ -172,17 +160,13 @@ function displayChallenges(challenges) {
 }
 
 async function uploadActivities(userId, activities) {
-  try {
-    await fetch(`${backendUrl}/api/users/${userId}/activities`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ activities }),
-    });
-  } catch (error) {
-    console.error('Error uploading activities:', error);
-  }
+  await fetch(`${backendUrl}/api/users/${userId}/activities`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ activities }),
+  });
 }
 
 async function displayLeaderboard(challengeId) {
@@ -199,7 +183,7 @@ async function displayLeaderboard(challengeId) {
       leaderboardContainer.appendChild(listItem);
     });
   } catch (error) {
-    console.error('Error loading leaderboard:', error);
+    console.error('Error fetching leaderboard:', error);
   }
 }
 
@@ -215,16 +199,12 @@ async function fetchAndDisplayUserGroups(userId) {
       groupsList.textContent = 'You are not participating in any groups.';
     } else {
       for (const groupId of data.groups) {
-        try {
-          const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
-          const groupData = await groupResponse.json();
+        const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
+        const groupData = await groupResponse.json();
 
-          const listItem = document.createElement('li');
-          listItem.textContent = `${groupData.name} - ${groupData.type} (${groupData.mode})`;
-          groupsList.appendChild(listItem);
-        } catch (error) {
-          console.error(`Error fetching details for group ${groupId}:`, error);
-        }
+        const listItem = document.createElement('li');
+        listItem.textContent = `${groupData.name} - ${groupId}`;
+        groupsList.appendChild(listItem);
       }
     }
   } catch (error) {
