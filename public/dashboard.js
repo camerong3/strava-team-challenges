@@ -115,6 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Log out button handler
+  const logoutButton = document.getElementById('logout-button');
+  logoutButton.addEventListener('click', () => {
+    // Clear Strava-related localStorage items
+    localStorage.removeItem('strava_athlete');
+    localStorage.removeItem('strava_access_token');
+    localStorage.removeItem('strava_activities_cache_time');
+    localStorage.removeItem('strava_activities');
+    
+    // Redirect to the homepage or login page
+    window.location.href = '/index.html';
+  });
 });
 
 async function fetchActivities(token) {
@@ -188,7 +201,7 @@ async function displayLeaderboard(challengeId) {
       data.leaderboard.forEach(entry => {
         const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
         const listItem = document.createElement('li');
-        listItem.textContent = `${entry.firstname}: ${distanceInMiles} miles`;
+        listItem.textContent = `${entry.firstname} ${entry.lastname}: ${distanceInMiles} miles`;
         leaderboardContainer.appendChild(listItem);
       });
     }
@@ -214,7 +227,7 @@ async function fetchAndDisplayUserGroups(userId) {
         const groupData = await groupResponse.json();
 
         const listItem = document.createElement('li');
-        listItem.textContent = `${groupData.name}`;
+        listItem.innerHTML = `<a href="/challenge-dashboard.html?id=${groupId}">${groupData.name}</a>`;
         groupsList.appendChild(listItem);
       }
     }
