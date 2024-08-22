@@ -1,6 +1,6 @@
 #login-image {
     width: 100%;
-    max-width: 200px; /* Adjust size as needed */
+    max-width: 100px; /* Adjust size as needed */
     display: block;
     margin: 20px auto;
     cursor: pointer;
@@ -43,5 +43,5 @@
     width: 100%;
     max-width: 175px; /* Adjust size as needed */
     display: block;
-    margin: 10px 10px;
+    margin: 20px 15px;
   }
