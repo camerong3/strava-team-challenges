@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   } else {
-    console.error('Refresh button not found');
+    console.warn('Refresh button not found');
   }
 
   // Handle challenge creation
