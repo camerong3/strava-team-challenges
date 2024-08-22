@@ -13,13 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // No token found, prompt user to log in
     console.log('No token found. Displaying sign-in button.');
     document.getElementById('status-message').textContent = 'Please sign in with Strava to continue.';
-    document.getElementById('strava-signin').style.display = 'block';
-  }
+    
+    // Create a new image element for login
+    const loginImage = document.createElement('img');
+    loginImage.src = 'path/to/your/image.png'; // Replace with the path to your image
+    loginImage.alt = 'Sign in with Strava';
+    loginImage.style.cursor = 'pointer';
+    loginImage.id = 'strava-signin';
 
-  document.getElementById('strava-signin').addEventListener('click', () => {
-    console.log('Redirecting to Strava for authorization...');
-    window.location.href = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=activity:read_all`;
-  });
+    // Append the image to the login container
+    const loginContainer = document.getElementById('login-container');
+    loginContainer.appendChild(loginImage);
+
+    // Add the click event to the image
+    loginImage.addEventListener('click', () => {
+      console.log('Redirecting to Strava for authorization...');
+      window.location.href = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=activity:read_all`;
+    });
+  }
 
   // Handle the redirect after Strava auth
   const urlParams = new URLSearchParams(window.location.search);
