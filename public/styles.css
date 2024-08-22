@@ -36,6 +36,29 @@
     color: #555;
   }
 
+  /* Ensure the body and html take up full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Content should grow and take up available space */
+  #content {
+    flex: 1;
+  }
+  
+  /* Footer styles */
+  #footer {
+    background-color: #f1f1f1; /* Change this to your preferred background color */
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional shadow for effect */
+  }
+  
+  /* Footer image styling */
   .footer-image {
     position: absolute;
     bottom: 0;

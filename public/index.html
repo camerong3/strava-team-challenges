@@ -8,29 +8,30 @@
   <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if needed -->
 </head>
 <body>
-  <h1>Strava Challenge Tracker</h1>
-  <p id="status-message">Checking login status...</p>
+  <div id="content">
+    <h1>Strava Challenge Tracker</h1>
+    <p id="status-message">Checking login status...</p>
+
+    <div id="login-container"></div>
+
+    <!-- Include the main JavaScript file -->
+    <script src="index.js"></script>
+
+    <!-- Register the service worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/serviceWorker.js')
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+      }
+    </script>
+  </div>
   
-  <div id="login-container"></div>
-
-  <!-- Include the main JavaScript file -->
-  <script src="index.js"></script>
-
-  <!-- Register the service worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/serviceWorker.js')
-      .then(registration => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch(error => {
-        console.log('Service Worker registration failed:', error);
-      });
-    }
-  </script>
-
-  <!-- Add this at the end of your HTML structure, before the closing body tag -->
-  <footer>
+  <footer id="footer">
     <img src="footer_img.png" alt="Footer Image" class="footer-image" />
   </footer>
 </body>

@@ -7,64 +7,65 @@
   <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if needed -->
 </head>
 <body>
-  <header>
-    <h1 id="challenge-name">Challenge Dashboard</h1>
-    <p id="challenge-details"></p>
-  </header>
+  <div id="content">
+    <header>
+        <h1 id="challenge-name">Challenge Dashboard</h1>
+        <p id="challenge-details"></p>
+    </header>
 
-  <section>
-    <h2>Leaderboard</h2>
-    <ul id="leaderboard" class="leaderboard-list"></ul>
-      <!-- Leaderboard entries will be dynamically inserted here -->
-      
-    </ul>
-  </section>
+    <section>
+        <h2>Leaderboard</h2>
+        <ul id="leaderboard" class="leaderboard-list"></ul>
+        <!-- Leaderboard entries will be dynamically inserted here -->
+        
+        </ul>
+    </section>
 
-  <footer>
-    <button id="refresh-leaderboard">Refresh Leaderboard</button>
-  </footer>
+    <footer>
+        <button id="refresh-leaderboard">Refresh Leaderboard</button>
+    </footer>
 
-  <script src="dashboard.js"></script> <!-- Link to your dashboard.js file -->
-  <script>
-    // Get challenge ID from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const challengeId = urlParams.get('id');
-  
-    if (challengeId) {
-      // Store the challenge ID in localStorage for future use
-      localStorage.setItem('challengeId', challengeId);
-    } else {
-      // Fallback if ID is not in the URL
-      console.error('Challenge ID not found in the URL');
-    }
-  
-    // Fetch and display the challenge details and leaderboard
-    async function loadChallengeDashboard() {
-      try {
-        const response = await fetch(`${backendUrl}/api/challenges/${challengeId}`);
-        const challenge = await response.json();
-  
-        // Display challenge name and details
-        document.getElementById('challenge-name').textContent = challenge.name;
-        document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityType} - ${challenge.mode}`;
-  
-        // Fetch and display leaderboard
+    <script src="dashboard.js"></script> <!-- Link to your dashboard.js file -->
+    <script>
+        // Get challenge ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const challengeId = urlParams.get('id');
+    
+        if (challengeId) {
+        // Store the challenge ID in localStorage for future use
+        localStorage.setItem('challengeId', challengeId);
+        } else {
+        // Fallback if ID is not in the URL
+        console.error('Challenge ID not found in the URL');
+        }
+    
+        // Fetch and display the challenge details and leaderboard
+        async function loadChallengeDashboard() {
+        try {
+            const response = await fetch(`${backendUrl}/api/challenges/${challengeId}`);
+            const challenge = await response.json();
+    
+            // Display challenge name and details
+            document.getElementById('challenge-name').textContent = challenge.name;
+            document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityType} - ${challenge.mode}`;
+    
+            // Fetch and display leaderboard
+            displayLeaderboard(challengeId);
+        } catch (error) {
+            console.error('Error loading challenge dashboard:', error);
+        }
+        }
+    
+        document.getElementById('refresh-leaderboard').addEventListener('click', () => {
         displayLeaderboard(challengeId);
-      } catch (error) {
-        console.error('Error loading challenge dashboard:', error);
-      }
-    }
+        });
+    
+        loadChallengeDashboard(); // Load the dashboard on page load
+    </script>
+  </div>
   
-    document.getElementById('refresh-leaderboard').addEventListener('click', () => {
-      displayLeaderboard(challengeId);
-    });
-  
-    loadChallengeDashboard(); // Load the dashboard on page load
-  </script>
-
-  <!-- Add this at the end of your HTML structure, before the closing body tag -->
-  <footer>
+  <footer id="footer">
     <img src="footer_img.png" alt="Footer Image" class="footer-image" />
-  </footer>  
+  </footer>
 </body>
 </html>
