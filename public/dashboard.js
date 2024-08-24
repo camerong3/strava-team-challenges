@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const createdBy = athlete.id;
       const firstname = athlete.firstname; // Retrieve first name
       const lastname = athlete.lastname;   // Retrieve last name
+      const startDate = document.getElementById('start-date').value;
+      const endDate = document.getElementById('end-date').value;
 
       // After successfully creating a challenge
       const response = await fetch(`${backendUrl}/api/challenges`, {
@@ -72,7 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
           activityType: activityType,
           createdBy: createdBy,
           firstname: firstname,
-          lastname: lastname
+          lastname: lastname,
+          startDate: startDate,
+          endDate: endDate
         })
       });
 
