@@ -187,21 +187,61 @@ async function uploadActivities(userId, activities) {
 async function displayLeaderboard(challengeId) {
   try {
     const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/leaderboard`);
+    
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     
     const data = await response.json();
     const leaderboardContainer = document.getElementById('leaderboard');
+
+    if (!leaderboardContainer) {
+      throw new Error("Element with ID 'leaderboard' not found in the DOM");
+    }
+
     leaderboardContainer.innerHTML = '';  // Clear previous leaderboard
 
     if (data.leaderboard.length === 0) {
       leaderboardContainer.textContent = 'No leaderboard data available.';
     } else {
       data.leaderboard.forEach(entry => {
-        const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles
+        const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
+        
+        // Create a list item for the leaderboard entry
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<span class="name">${entry.firstname} ${entry.lastname}</span><span class="distance">${distanceInMiles} miles</span>`;
+        
+        // Create a clickable span for the participant's name
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = `${entry.firstname} ${entry.lastname}: ${distanceInMiles} miles`;
+        nameSpan.style.cursor = 'pointer';
+        nameSpan.addEventListener('click', () => {
+          // Toggle the visibility of the activity list
+          const activitiesList = listItem.querySelector('.activities-list');
+          activitiesList.style.display = activitiesList.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Append the name span to the list item
+        listItem.appendChild(nameSpan);
+
+        // Create a hidden list for the activities
+        const activitiesList = document.createElement('ul');
+        activitiesList.classList.add('activities-list');
+        activitiesList.style.display = 'none'; // Initially hidden
+
+        entry.activities.forEach(activity => {
+          const activityItem = document.createElement('li');
+          const activityLink = document.createElement('a');
+          activityLink.href = `https://www.strava.com/activities/${activity.id}`;
+          activityLink.textContent = `${activity.name} - ${(activity.distance / 1609.34).toFixed(2)} miles`;
+          activityLink.target = '_blank';
+          activityItem.appendChild(activityLink);
+          activitiesList.appendChild(activityItem);
+        });
+
+        // Append the activities list to the list item
+        listItem.appendChild(activitiesList);
+
+        // Append the list item to the leaderboard container
         leaderboardContainer.appendChild(listItem);
       });
     }
