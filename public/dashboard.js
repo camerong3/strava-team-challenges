@@ -153,8 +153,20 @@ function displayActivities(activities) {
 
     activities.forEach(activity => {
       const distanceInMiles = (activity.distance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
+      
+      // Create a list item
       const listItem = document.createElement('li');
-      listItem.textContent = `${activity.name} - ${distanceInMiles} miles`;
+
+      // Create an anchor tag to link to the activity on Strava
+      const activityLink = document.createElement('a');
+      activityLink.href = `https://www.strava.com/activities/${activity.id}`;
+      activityLink.textContent = `${activity.name} - ${distanceInMiles} miles`;
+      activityLink.target = '_blank'; // Open in a new tab
+
+      // Append the anchor tag to the list item
+      listItem.appendChild(activityLink);
+
+      // Append the list item to the activities list
       activitiesList.appendChild(listItem);
     });
   } else {
@@ -175,38 +187,25 @@ async function uploadActivities(userId, activities) {
 async function displayLeaderboard(challengeId) {
   try {
     const response = await fetch(`${backendUrl}/api/challenges/${challengeId}/leaderboard`);
-    
-    // Debug: Check if the response is OK
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     
     const data = await response.json();
-
-    // Debug: Log the data received from the backend
-    console.log("Leaderboard data received:", data);
-
     const leaderboardContainer = document.getElementById('leaderboard');
-
-    // Debug: Check if leaderboardContainer exists
-    if (!leaderboardContainer) {
-      throw new Error("Element with ID 'leaderboard' not found in the DOM");
-    }
-
     leaderboardContainer.innerHTML = '';  // Clear previous leaderboard
 
     if (data.leaderboard.length === 0) {
       leaderboardContainer.textContent = 'No leaderboard data available.';
     } else {
       data.leaderboard.forEach(entry => {
-        const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
+        const distanceInMiles = (entry.totalDistance / 1609.34).toFixed(2); // Convert meters to miles
         const listItem = document.createElement('li');
-        listItem.textContent = `${entry.firstname} ${entry.lastname}: ${distanceInMiles} miles`;
+        listItem.innerHTML = `<span class="name">${entry.firstname} ${entry.lastname}</span><span class="distance">${distanceInMiles} miles</span>`;
         leaderboardContainer.appendChild(listItem);
       });
     }
   } catch (error) {
-    // Debug: Log any errors encountered
     console.error('Error fetching leaderboard:', error);
   }
 }
