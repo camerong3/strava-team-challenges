@@ -164,9 +164,23 @@ body {
     font-size: 1em;
 }
 
-#challenge-name, #activity-types, #start-date, #end-date {
+#challenge-name {
     width: 60%;
     padding: 12px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#activity-types {
+    margin: 10px;
+}
+
+#start-date, #end-date {
+    width: 40%;
+    padding: 12px;
+    margin-left: 20px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
