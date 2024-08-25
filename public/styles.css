@@ -167,7 +167,7 @@ body {
 #challenge-name {
     width: 60%;
     padding: 12px;
-    margin-left: 20px;
+    margin-left: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -186,7 +186,8 @@ body {
 #start-date, #end-date {
     width: 20%;
     padding: 12px;
-    margin-left: 20px;
+    margin-left: 15px;
+    margin-right: 20px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
