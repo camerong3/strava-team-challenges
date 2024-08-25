@@ -65,7 +65,8 @@ body {
 }
   
 .header.scrolled .profile-photo {
-    transform: scale(0.4);
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
 }
   

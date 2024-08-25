@@ -291,23 +291,12 @@ async function fetchAndDisplayUserGroups(userId) {
 // Scroll event handling for header
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.header');
-  const profilePhoto = document.querySelector('.profile-photo');
-  const profileDetails = document.querySelector('.profile-details');
-
-  const initialHeight = header.offsetHeight;
-  const minHeight = 60; // The height after it shrinks completely
 
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-
-    if (scrollY < initialHeight - minHeight) {
-      const scale = 1 - (scrollY / (initialHeight - minHeight));
-      header.style.height = `${initialHeight - scrollY}px`;
-      profilePhoto.style.transform = `scale(${Math.max(scale, 0.4)})`;
-      profileDetails.style.transform = `translateY(${-10 * (1 - scale)}px)`;
-      profileDetails.style.opacity = scale;
-    } else {
+    if (window.scrollY > 0) {  // Adjust this value as needed
       header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
   });
 });
