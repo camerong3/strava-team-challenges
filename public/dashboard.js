@@ -296,20 +296,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
+    const scrollThreshold = initialHeight - minHeight;
 
-    if (scrollY > 10 && scrollY < initialHeight - minHeight + 10) {
-      const newHeight = Math.max(minHeight, initialHeight - (scrollY - 10));
-      header.style.height = `${newHeight}px`;
-
-      const scale = (newHeight - minHeight) / (initialHeight - minHeight);
-      header.style.padding = `${10 + (10 * scale)}px 20px`;
-    } else if (scrollY >= initialHeight - minHeight + 10) {
+    if (scrollY > scrollThreshold) {
+      // Once the scroll passes the threshold, fix the header to its shrunken state
       header.style.height = `${minHeight}px`;
       header.style.padding = '10px 20px';
       header.classList.add('scrolled');
     } else {
-      header.style.height = `${initialHeight}px`;
-      header.style.padding = '20px';
+      // As the user scrolls within the threshold, smoothly transition the header
+      const newHeight = initialHeight - scrollY;
+      header.style.height = `${newHeight}px`;
+
+      const scale = (newHeight - minHeight) / scrollThreshold;
+      header.style.padding = `${10 + (10 * scale)}px 20px`;
       header.classList.remove('scrolled');
     }
   });
