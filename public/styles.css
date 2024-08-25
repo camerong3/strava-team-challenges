@@ -295,6 +295,23 @@ body {
 }
 
 /* Style for the leaderboard items */
+#content-leaderboard header {
+    background-color: #fc4c02;
+}
+
+#content-leaderboard h1 {
+    color: white;
+    border: none;
+    margin-left: 0px;
+}
+
+#content-leaderboard h2 {
+    color: black;
+    margin-bottom: 10px;
+    border: none;
+    margin-left: 10px;
+}
+
 .leaderboard-item {
     padding: 15px;
     border: 1px solid #ddd;
@@ -308,6 +325,17 @@ body {
     background-color: #f0f0f0;
 }
   
+#refresh-leaderboard {
+    background-color: #ddd;
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+
 /* Style for the participant's name */
 .leaderboard-name {
     font-weight: bold;
