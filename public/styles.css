@@ -15,7 +15,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 20px;
     background-color: #fc4c02; /* Strava's orange color */
     color: white;
     position: relative;
@@ -62,6 +62,7 @@ body {
     padding: 10px 20px;
     background-color: #fc4c02;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 60px; /* Adjust this to match the shrunken header height */
 }
   
 .header.scrolled .profile-photo {
@@ -76,6 +77,11 @@ body {
   
 .header.scrolled .profile-details p {
     display: none;
+}
+
+/* Main content should have a top margin equal to the shrunken header height */
+#content {
+    margin-top: 60px; /* Adjust this to match the shrunken header height */
 }
 
 /* Log out button styling */
