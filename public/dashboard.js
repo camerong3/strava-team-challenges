@@ -274,13 +274,45 @@ async function fetchAndDisplayUserGroups(userId) {
     if (data.groups.length === 0) {
       groupsList.textContent = 'You are not participating in any groups.';
     } else {
+      let mostRecentGroup;
+      let mostRecentGroupData;
+
+      // Find the most recent group (assuming the last group in the array is the most recent)
       for (const groupId of data.groups) {
         const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
         const groupData = await groupResponse.json();
 
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="/challenge-dashboard.html?id=${groupId}">${groupData.name}</a>`;
-        groupsList.appendChild(listItem);
+        // Update the most recent group
+        if (!mostRecentGroup) {
+          mostRecentGroup = groupId;
+          mostRecentGroupData = groupData;
+        }
+
+        // Create list items for all groups except the most recent one
+        if (groupId !== mostRecentGroup) {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<a href="/challenge-dashboard.html?id=${groupId}">${groupData.name}</a>`;
+          groupsList.appendChild(listItem);
+        }
+      }
+
+      // Display detailed view for the most recent group
+      if (mostRecentGroupData) {
+        const detailedViewContainer = document.createElement('div');
+        detailedViewContainer.classList.add('detailed-group-view');
+
+        const groupName = document.createElement('h3');
+        groupName.textContent = mostRecentGroupData.name;
+
+        // Placeholder for leaderboard position and total mileage
+        const groupStats = document.createElement('p');
+        groupStats.textContent = `Leaderboard Position: N/A | Total Mileage: N/A`; // Update with actual data as needed
+
+        detailedViewContainer.appendChild(groupName);
+        detailedViewContainer.appendChild(groupStats);
+
+        // Insert the detailed view at the top of the groups list
+        groupsList.prepend(detailedViewContainer);
       }
     }
   } catch (error) {
