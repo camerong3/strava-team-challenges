@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.header');
   const content = document.getElementById('content');
   const initialHeight = header.offsetHeight;
-  const minHeight = 60; // The height after it shrinks completely
+  const minHeight = 80; // The height after it shrinks completely
 
   window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
