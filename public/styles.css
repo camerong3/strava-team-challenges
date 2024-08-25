@@ -102,47 +102,8 @@ body {
     background-color: #c63a00;
 }
 
-/* Current Group Section */
-#current-group {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  #current-group h2 {
-    color: #fc4c02;
-    margin-bottom: 15px;
-  }
-  
-  .group-details {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .group-details .leaderboard-position {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .group-details .total-mileage {
-    font-size: 1.2em;
-    color: #666;
-  }
-  
-  /* Other Groups Section */
-  #other-groups h3 {
-    margin-bottom: 15px;
-  }
-  
-  .group-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .group-list li {
+/* Style for group items */
+.group-item {
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -151,14 +112,19 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  .group-list li:hover {
+  .group-item:hover {
     background-color: #f0f0f0;
   }
   
-  .group-list li .group-name {
-    font-weight: bold;
-    display: block;
+  .group-item h3 {
     margin-bottom: 5px;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .group-item p {
+    margin: 5px 0;
+    color: #666;
   }  
 
 /* Challenge Section */

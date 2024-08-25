@@ -265,59 +265,58 @@ async function displayLeaderboard(challengeId) {
 
 async function fetchAndDisplayUserGroups(userId) {
   try {
-    const currentGroupDetails = document.getElementById('current-group-details');
-    const otherGroupsList = document.getElementById('other-groups-list');
+    const groupsList = document.getElementById('user-groups-list');
     
-    // Check if the elements exist in the DOM
-    if (!currentGroupDetails) {
-      throw new Error("Element with ID 'current-group-details' not found in the DOM");
-    }
-    if (!otherGroupsList) {
-      throw new Error("Element with ID 'other-groups-list' not found in the DOM");
+    // Check if the element exists in the DOM
+    if (!groupsList) {
+      throw new Error("Element with ID 'user-groups-list' not found in the DOM");
     }
 
     // Clear previous content
-    currentGroupDetails.innerHTML = '';
-    otherGroupsList.innerHTML = '';
+    groupsList.innerHTML = '';
 
     const response = await fetch(`${backendUrl}/api/users/${userId}/groups`);
     const data = await response.json();
 
     if (data.groups.length === 0) {
-      otherGroupsList.textContent = 'You are not participating in any groups.';
+      groupsList.textContent = 'You are not participating in any groups.';
     } else {
-      let mostRecentGroup;
-      let mostRecentGroupData;
-
-      // Find the most recent group (assuming the last group in the array is the most recent)
       for (const groupId of data.groups) {
         const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
         const groupData = await groupResponse.json();
 
-        // Update the most recent group
-        if (!mostRecentGroup) {
-          mostRecentGroup = groupId;
-          mostRecentGroupData = groupData;
-        }
+        const listItem = document.createElement('li');
+        listItem.classList.add('group-item');
 
-        // Create list items for all groups except the most recent one
-        if (groupId !== mostRecentGroup) {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = `<a href="/challenge-dashboard.html?id=${groupId}">${groupData.name}</a>`;
-          otherGroupsList.appendChild(listItem);
-        }
-      }
-
-      // Display detailed view for the most recent group
-      if (mostRecentGroupData) {
+        // Challenge Name
         const groupName = document.createElement('h3');
-        groupName.textContent = mostRecentGroupData.name;
+        groupName.textContent = groupData.name;
 
+        // Start and End Dates (shortened)
+        const startDate = new Date(groupData.startDate).toLocaleDateString(undefined, {
+          month: 'numeric',
+          day: 'numeric',
+          year: '2-digit',
+        });
+        const endDate = new Date(groupData.endDate).toLocaleDateString(undefined, {
+          month: 'numeric',
+          day: 'numeric',
+          year: '2-digit',
+        });
+        const dateRange = document.createElement('p');
+        dateRange.textContent = `${startDate} - ${endDate}`;
+
+        // Placeholder for Leaderboard Position and Distance
         const groupStats = document.createElement('p');
         groupStats.textContent = `Leaderboard Position: N/A | Total Mileage: N/A`; // Update with actual data as needed
 
-        currentGroupDetails.appendChild(groupName);
-        currentGroupDetails.appendChild(groupStats);
+        // Append details to listItem
+        listItem.appendChild(groupName);
+        listItem.appendChild(dateRange);
+        listItem.appendChild(groupStats);
+
+        // Append listItem to groupsList
+        groupsList.appendChild(listItem);
       }
     }
   } catch (error) {
