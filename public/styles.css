@@ -164,15 +164,15 @@ body {
     font-size: 1em;
 }
 
-#challenge-name {
-    width: 80%;
+#challenge-name, #activity-types, #start-date, #end-date {
+    width: 60%;
     padding: 12px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
 }
 
-#challenge-type, #challenge-mode, #start-date, #end-date {
+#challenge-type, #challenge-mode {
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
