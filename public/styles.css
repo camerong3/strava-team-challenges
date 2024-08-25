@@ -76,6 +76,24 @@ body {
     display: none;
 }
 
+/* Log out button styling */
+.btn-logout {
+    background-color: #e04800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.btn-logout:hover {
+    background-color: #c63a00;
+}
+
 /* Challenge Section */
 .challenge-section {
     margin: 20px;
