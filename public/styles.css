@@ -71,7 +71,6 @@ body {
 }
   
 .header.scrolled .profile-details h1 {
-    transform: translateY(-10px);
     font-size: 1.2em;
 }
   

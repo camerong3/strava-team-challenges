@@ -291,11 +291,22 @@ async function fetchAndDisplayUserGroups(userId) {
 // Scroll event handling for header
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.header');
+  const initialHeight = header.offsetHeight;
+  const minHeight = 60; // The height after it shrinks completely
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 0) {  // Adjust this value as needed
+    const scrollY = window.scrollY;
+
+    if (scrollY > 10 && scrollY < initialHeight - minHeight + 10) {
+      const scale = 1 - ((scrollY - 10) / (initialHeight - minHeight));
+      header.style.height = `${initialHeight - (scrollY - 10)}px`;
+      header.style.padding = `${20 * scale}px`;
+    } else if (scrollY >= initialHeight - minHeight + 10) {
+      header.style.height = `${minHeight}px`;
       header.classList.add('scrolled');
     } else {
+      header.style.height = `${initialHeight}px`;
+      header.style.padding = '20px';
       header.classList.remove('scrolled');
     }
   });
