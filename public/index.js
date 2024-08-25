@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add the click event to the image
     loginImage.addEventListener('click', () => {
       console.log('Redirecting to Strava for authorization...');
-      window.location.href = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=activity:read_all`;
+      window.location.href = `https://www.strava.com/oauth/mobile/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=activity:read_all`;
     });
   }
 
