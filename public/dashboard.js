@@ -287,3 +287,16 @@ async function fetchAndDisplayUserGroups(userId) {
     console.error('Error fetching user groups:', error);
   }
 }
+
+// Scroll event handling for header
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.header');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {  // Adjust this value as needed
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+});

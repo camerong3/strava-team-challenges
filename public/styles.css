@@ -2,47 +2,98 @@
 body, h1, h2, h3, p, ul {
     margin: 0;
     padding: 0;
-  }
+}
   
-  body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     color: #333;
-  }
+}
   
-  /* Header */
-  .header {
-    background-color: #fc4c02; /* Strava's orange color */
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px;
-    text-align: center;
+    background-color: #fc4c02; /* Strava's orange color */
     color: white;
-  }
+    position: relative;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+}
   
-  .profile-photo {
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+  
+.profile-photo {
+    border-radius: 50%;
     width: 100px;
     height: 100px;
-    border-radius: 50%;
-    margin-top: 10px;
-  }
+    margin-right: 20px;
+    transition: width 0.3s, height 0.3s, margin-right 0.3s;
+}
   
-  /* Challenge Section */
-  .challenge-section {
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  
+.profile-details h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+  
+.profile-details p {
+    margin: 2px 0;
+    color: white;
+}
+  
+.header.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background-color: #fc4c02;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+.header.scrolled .profile-photo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+  
+.header.scrolled .profile-details h1 {
+    font-size: 1.2em;
+}
+  
+.header.scrolled .profile-details p {
+    display: none;
+}
+
+/* Challenge Section */
+.challenge-section {
     margin: 20px;
-  }
+}
   
-  .challenge-section h2 {
+.challenge-section h2 {
     color: #fc4c02;
-  }
+}
   
-  #challenge-name, #challenge-type, #challenge-mode, #start-date, #end-date {
+#challenge-name, #challenge-type, #challenge-mode, #start-date, #end-date {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
-  }
+}
   
-  .btn-primary {
+.btn-primary {
     background-color: #fc4c02;
     color: white;
     padding: 10px 15px;
@@ -52,13 +103,13 @@ body, h1, h2, h3, p, ul {
     width: 100%;
     margin-top: 10px;
     font-size: 1em;
-  }
+}
   
-  .btn-primary:hover {
+.btn-primary:hover {
     background-color: #e04800;
-  }
+}
   
-  .btn-secondary {
+.btn-secondary {
     background-color: #ddd;
     color: #333;
     padding: 10px 15px;
@@ -67,47 +118,47 @@ body, h1, h2, h3, p, ul {
     cursor: pointer;
     margin-top: 10px;
     font-size: 1em;
-  }
+}
   
-  .btn-secondary:hover {
+.btn-secondary:hover {
     background-color: #ccc;
-  }
+}
   
-  /* Activities Section */
-  .activities-section {
+/* Activities Section */
+.activities-section {
     margin: 20px;
-  }
+}
   
-  #activities-list {
+#activities-list {
     list-style-type: none;
     padding: 0;
     margin-top: 20px;
-  }
+}
   
-  #activities-list li {
+#activities-list li {
     background-color: white;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
-  }
-  
-  /* Footer */
-  #footer {
+}
+
+/* Footer */
+#footer {
     background-color: #f1f1f1;
     text-align: center;
     padding: 10px;
     width: 100%;
-  }
+}
   
-  .footer-image {
+.footer-image {
     width: 100%;
     max-width: 175px;
     display: block;
     margin: 0 auto;
-  }
+}
 
-  /* Style for the leaderboard items */
+/* Style for the leaderboard items */
 .leaderboard-item {
     padding: 15px;
     border: 1px solid #ddd;
@@ -115,34 +166,33 @@ body, h1, h2, h3, p, ul {
     margin-bottom: 10px;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .leaderboard-item:hover {
+.leaderboard-item:hover {
     background-color: #f0f0f0;
-  }
+}
   
-  /* Style for the participant's name */
-  .leaderboard-name {
+/* Style for the participant's name */
+.leaderboard-name {
     font-weight: bold;
     font-size: 1.2em;
     display: block;
     margin-bottom: 5px;
-  }
+}
   
-  /* Style for the activities list */
-  .activities-list {
+/* Style for the activities list */
+.activities-list {
     margin-top: 10px;
     padding-left: 20px;
     list-style-type: none;
     display: none; /* Initially hidden */
-  }
+}
   
-  .activity-item {
+.activity-item {
     margin-bottom: 5px;
-  }
+}
   
-  /* Optional: Animation for smooth expansion */
-  .activities-list {
+/* Optional: Animation for smooth expansion */
+.activities-list {
     transition: max-height 0.5s ease-out;
-  }
-  
+}
