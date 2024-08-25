@@ -33,6 +33,7 @@ body {
     width: 80px;
     height: 80px;
     margin-right: 20px;
+    transition: width 0.3s, height 0.3s, margin-right 0.3s;
 }
   
 .profile-details {
@@ -43,7 +44,7 @@ body {
   
 .profile-details h1 {
     margin: 0;
-    font-size: 1.0em;
+    font-size: 1.2em;
     color: white;
 }
   
@@ -93,6 +94,19 @@ body {
 
 .btn-logout:hover {
     background-color: #c63a00;
+}
+
+/* Group Section */
+.user-section {
+    margin: 20px;
+}
+
+.user-section h3 {
+    color: #fc4c02;
+}
+
+.user-section ul {
+    
 }
 
 /* Challenge Section */
