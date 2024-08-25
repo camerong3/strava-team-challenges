@@ -265,14 +265,26 @@ async function displayLeaderboard(challengeId) {
 
 async function fetchAndDisplayUserGroups(userId) {
   try {
+    const currentGroupDetails = document.getElementById('current-group-details');
+    const otherGroupsList = document.getElementById('other-groups-list');
+    
+    // Check if the elements exist in the DOM
+    if (!currentGroupDetails) {
+      throw new Error("Element with ID 'current-group-details' not found in the DOM");
+    }
+    if (!otherGroupsList) {
+      throw new Error("Element with ID 'other-groups-list' not found in the DOM");
+    }
+
+    // Clear previous content
+    currentGroupDetails.innerHTML = '';
+    otherGroupsList.innerHTML = '';
+
     const response = await fetch(`${backendUrl}/api/users/${userId}/groups`);
     const data = await response.json();
 
-    const groupsList = document.getElementById('user-groups-list');
-    groupsList.innerHTML = ''; // Clear the list first
-
     if (data.groups.length === 0) {
-      groupsList.textContent = 'You are not participating in any groups.';
+      otherGroupsList.textContent = 'You are not participating in any groups.';
     } else {
       let mostRecentGroup;
       let mostRecentGroupData;
@@ -292,31 +304,24 @@ async function fetchAndDisplayUserGroups(userId) {
         if (groupId !== mostRecentGroup) {
           const listItem = document.createElement('li');
           listItem.innerHTML = `<a href="/challenge-dashboard.html?id=${groupId}">${groupData.name}</a>`;
-          groupsList.appendChild(listItem);
+          otherGroupsList.appendChild(listItem);
         }
       }
 
       // Display detailed view for the most recent group
       if (mostRecentGroupData) {
-        const detailedViewContainer = document.createElement('div');
-        detailedViewContainer.classList.add('detailed-group-view');
-
         const groupName = document.createElement('h3');
         groupName.textContent = mostRecentGroupData.name;
 
-        // Placeholder for leaderboard position and total mileage
         const groupStats = document.createElement('p');
         groupStats.textContent = `Leaderboard Position: N/A | Total Mileage: N/A`; // Update with actual data as needed
 
-        detailedViewContainer.appendChild(groupName);
-        detailedViewContainer.appendChild(groupStats);
-
-        // Insert the detailed view at the top of the groups list
-        groupsList.prepend(detailedViewContainer);
+        currentGroupDetails.appendChild(groupName);
+        currentGroupDetails.appendChild(groupStats);
       }
     }
   } catch (error) {
-    console.error('Error fetching user groups:', error);
+    console.error('Error fetching user groups:', error.message);
   }
 }
 
