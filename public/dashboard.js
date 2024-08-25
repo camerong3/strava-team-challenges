@@ -285,14 +285,18 @@ async function fetchAndDisplayUserGroups(userId) {
         const groupResponse = await fetch(`${backendUrl}/api/challenges/${groupId}`);
         const groupData = await groupResponse.json();
 
+        // Create a clickable container for the group item
         const listItem = document.createElement('li');
         listItem.classList.add('group-item');
+        listItem.onclick = () => {
+          window.location.href = `/challenge-dashboard.html?id=${groupId}`;
+        };
 
         // Challenge Name
         const groupName = document.createElement('h3');
         groupName.textContent = groupData.name;
 
-        // Start and End Dates (shortened)
+        // Start and End Dates (shortened) placed on the top right
         const startDate = new Date(groupData.startDate).toLocaleDateString(undefined, {
           month: 'numeric',
           day: 'numeric',
@@ -303,8 +307,9 @@ async function fetchAndDisplayUserGroups(userId) {
           day: 'numeric',
           year: '2-digit',
         });
-        const dateRange = document.createElement('p');
+        const dateRange = document.createElement('span');
         dateRange.textContent = `${startDate} - ${endDate}`;
+        dateRange.classList.add('date-range');
 
         // Placeholder for Leaderboard Position and Distance
         const groupStats = document.createElement('p');
@@ -312,7 +317,7 @@ async function fetchAndDisplayUserGroups(userId) {
 
         // Append details to listItem
         listItem.appendChild(groupName);
-        listItem.appendChild(dateRange);
+        listItem.appendChild(dateRange);  // Add the date range to the top right
         listItem.appendChild(groupStats);
 
         // Append listItem to groupsList
