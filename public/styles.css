@@ -106,4 +106,43 @@ body, h1, h2, h3, p, ul {
     display: block;
     margin: 0 auto;
   }
+
+  /* Style for the leaderboard items */
+.leaderboard-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+  }
+  
+  .leaderboard-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Style for the participant's name */
+  .leaderboard-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Style for the activities list */
+  .activities-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: none;
+    display: none; /* Initially hidden */
+  }
+  
+  .activity-item {
+    margin-bottom: 5px;
+  }
+  
+  /* Optional: Animation for smooth expansion */
+  .activities-list {
+    transition: max-height 0.5s ease-out;
+  }
   
