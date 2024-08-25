@@ -103,24 +103,27 @@ body {
 }
 
 /* Style for group items */
+.group-section {
+    margin: 20px;
+}
+
 .group-item {
     position: relative;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease;
     cursor: pointer; /* Make the item clickable */
+    list-style-type: none;
   }
   
   .group-item:hover {
     background-color: #f0f0f0;
   }
   
-  .group-item h4 {
+  .group-section h4 {
     margin-bottom: 5px;
     font-size: 1.5em;
     color: #fc4c02;
