@@ -303,11 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.add('scrolled');
     } else {
       // As the user scrolls within the threshold, smoothly transition the header
-      const newHeight = initialHeight - scrollY;
-      header.style.height = `${newHeight}px`;
-
-      const scale = (newHeight - minHeight) / scrollThreshold;
-      header.style.padding = `${10 + (10 * scale)}px 20px`;
       header.classList.remove('scrolled');
     }
   });
