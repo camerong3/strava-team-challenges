@@ -300,8 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrollY > scrollThreshold) {
       // Once the scroll passes the threshold, fix the header to its shrunken state
-      header.style.height = `${minHeight}px`;
-      header.style.padding = '10px 20px';
       header.classList.add('scrolled');
     } else {
       // As the user scrolls within the threshold, smoothly transition the header
