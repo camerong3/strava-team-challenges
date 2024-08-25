@@ -30,10 +30,9 @@ body {
   
 .profile-photo {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin-right: 20px;
-    transition: width 0.3s, height 0.3s, margin-right 0.3s;
 }
   
 .profile-details {
@@ -44,12 +43,14 @@ body {
   
 .profile-details h1 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.0em;
+    color: white;
 }
   
 .profile-details p {
     margin: 2px 0;
-    color: white;
+    font-size: 0.8em;
+    color: #f1f1f1;
 }
   
 .header.scrolled {
