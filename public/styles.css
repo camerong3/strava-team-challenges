@@ -164,10 +164,18 @@ body {
     font-size: 1em;
 }
 
-#challenge-name, #challenge-type, #challenge-mode, #start-date, #end-date {
+#challenge-name {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#challenge-type, #challenge-mode, #start-date, #end-date {
     width: 100%;
     padding: 12px;
-    margin: 0px;
+    margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
 }
