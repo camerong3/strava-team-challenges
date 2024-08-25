@@ -36,13 +36,14 @@
             <option value="team">Team</option>
         </select><br>
 
-        <label for="activity-type">Activity Type:</label>
-        <select id="activity-type" required>
-            <option value="Run">Run</option>
-            <option value="Walk">Walk</option>
-            <option value="Ride">Ride</option>
-            <option value="Hike">Hike</option>
-            <option value="Swim">Swim</option>
+        <label for="activity-types">Activity Type:</label>
+        <div id="activity-types">
+            <label><input type="checkbox" name="activity-type" value="Run"> Run</label><br>
+            <label><input type="checkbox" name="activity-type" value="Walk"> Walk</label><br>
+            <label><input type="checkbox" name="activity-type" value="Ride"> Ride</label><br>
+            <label><input type="checkbox" name="activity-type" value="Hike"> Hike</label><br>
+            <label><input type="checkbox" name="activity-type" value="Swim"> Swim</label><br>
+        </div>
             <!-- Add more activity types as needed -->
         </select><br>
 
@@ -51,7 +52,7 @@
 
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date" name="end-date" required>
-        
+
         <button type="submit">Create Challenge</button>
       </form>
     <h2>Recent Activities</h2>

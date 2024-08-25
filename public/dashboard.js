@@ -47,49 +47,52 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Refresh button not found');
   }
 
-  // Handle challenge creation
-  const challengeForm = document.getElementById('create-challenge-form');
-  if (challengeForm) {
-    challengeForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+// Handle challenge creation
+const challengeForm = document.getElementById('create-challenge-form');
+if (challengeForm) {
+  challengeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const challengeName = document.getElementById('challenge-name').value;
-      const challengeType = document.getElementById('challenge-type').value;
-      const challengeMode = document.getElementById('challenge-mode').value;
-      const activityType = document.getElementById('activity-type').value;
-      const createdBy = athlete.id;
-      const firstname = athlete.firstname; // Retrieve first name
-      const lastname = athlete.lastname;   // Retrieve last name
-      const startDate = document.getElementById('start-date').value;
-      const endDate = document.getElementById('end-date').value;
+    const challengeName = document.getElementById('challenge-name').value;
+    const challengeType = document.getElementById('challenge-type').value;
+    const challengeMode = document.getElementById('challenge-mode').value;
+    const createdBy = athlete.id;
+    const firstname = athlete.firstname; // Retrieve first name
+    const lastname = athlete.lastname;   // Retrieve last name
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
 
-      // After successfully creating a challenge
-      const response = await fetch(`${backendUrl}/api/challenges`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: challengeName,
-          type: challengeType,
-          mode: challengeMode,
-          activityType: activityType,
-          createdBy: createdBy,
-          firstname: firstname,
-          lastname: lastname,
-          startDate: startDate,
-          endDate: endDate
-        })
-      });
+    // Collect all selected activity types from the checkboxes
+    const activityTypeCheckboxes = document.querySelectorAll('input[name="activity-type"]:checked');
+    const activityTypes = Array.from(activityTypeCheckboxes).map(checkbox => checkbox.value);
 
-      const data = await response.json();
-      console.log('Challenge created with ID:', data.id);
-
-      // Store the challenge ID in localStorage
-      localStorage.setItem('challengeId', data.id);
-
-      // Redirect to the challenge dashboard after creating the challenge
-      window.location.href = `/challenge-dashboard.html?id=${data.id}`;
+    // After successfully creating a challenge
+    const response = await fetch(`${backendUrl}/api/challenges`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: challengeName,
+        type: challengeType,
+        mode: challengeMode,
+        activityTypes: activityTypes,  // Pass the selected activity types as an array
+        createdBy: createdBy,
+        firstname: firstname,
+        lastname: lastname,
+        startDate: startDate,
+        endDate: endDate
+      })
     });
-  }
+
+    const data = await response.json();
+    console.log('Challenge created with ID:', data.id);
+
+    // Store the challenge ID in localStorage
+    localStorage.setItem('challengeId', data.id);
+
+    // Redirect to the challenge dashboard after creating the challenge
+    window.location.href = `/challenge-dashboard.html?id=${data.id}`;
+  });
+}
 
   // Handle joining a challenge
   const joinChallengeForm = document.getElementById('join-challenge-form');
