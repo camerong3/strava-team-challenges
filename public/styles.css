@@ -173,12 +173,18 @@ body {
     border: 1px solid #ccc;
 }
 
+#challenge-type, #challenge-mode {
+    width: 40%;
+    padding: 12px;
+    margin: 10px;
+}
+
 #activity-types {
     margin: 10px;
 }
 
 #start-date, #end-date {
-    width: 40%;
+    width: 20%;
     padding: 12px;
     margin-left: 20px;
     margin-bottom: 10px;
