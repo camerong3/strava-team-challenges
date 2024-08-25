@@ -81,7 +81,7 @@ body {
 
 /* Adjust margin-top when the header is scrolled */
 #content.with-scrolled-header {
-    margin-top: 130px; /* Matches the height of the shrunken header */
+    margin-top: 150px; /* Matches the height of the shrunken header */
 }
 
 /* Log out button styling */
