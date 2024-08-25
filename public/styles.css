@@ -79,9 +79,9 @@ body {
     display: none;
 }
 
-/* Main content should have a top margin equal to the shrunken header height */
-#content {
-    margin-top: 60px; /* Adjust this to match the shrunken header height */
+/* Adjust margin-top when the header is scrolled */
+#content.with-scrolled-header {
+    margin-top: 60px; /* Matches the height of the shrunken header */
 }
 
 /* Log out button styling */
