@@ -298,11 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.scrollY;
 
     if (scrollY > 10 && scrollY < initialHeight - minHeight + 10) {
-      const scale = 1 - ((scrollY - 10) / (initialHeight - minHeight));
-      header.style.height = `${initialHeight - (scrollY - 10)}px`;
-      header.style.padding = `${20 * scale}px`;
+      const newHeight = Math.max(minHeight, initialHeight - (scrollY - 10));
+      header.style.height = `${newHeight}px`;
+
+      const scale = (newHeight - minHeight) / (initialHeight - minHeight);
+      header.style.padding = `${10 + (10 * scale)}px 20px`;
     } else if (scrollY >= initialHeight - minHeight + 10) {
       header.style.height = `${minHeight}px`;
+      header.style.padding = '10px 20px';
       header.classList.add('scrolled');
     } else {
       header.style.height = `${initialHeight}px`;
