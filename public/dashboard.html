@@ -4,21 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Strava Challenge Tracker</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if needed -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="content">
-    <h1>Welcome, <span id="athlete-name"></span></h1>
-    <img id="athlete-photo" src="" alt="Profile Photo">
-    <p>City: <span id="athlete-city"></span></p>
-    <p>State: <span id="athlete-state"></span></p>
+    <header class="header">
+      <h1>Welcome, <span id="athlete-name"></span></h1>
+      <img id="athlete-photo" src="" alt="Profile Photo" class="profile-photo">
+      <p>City: <span id="athlete-city"></span></p>
+      <p>State: <span id="athlete-state"></span></p>
+    </header>
     
     <section id="user-groups">
       <h3>Your Groups</h3>
       <ul id="user-groups-list"></ul>
     </section>
     
-    <h2>Create a Challenge</h2>
+    <section class="challenge-section">
+      <h2>Create a Challenge</h2>
       <form id="create-challenge-form">
         <label for="challenge-name">Name:</label>
         <input type="text" id="challenge-name" required><br>
@@ -44,8 +47,6 @@
             <label><input type="checkbox" name="activity-type" value="Hike"> Hike</label><br>
             <label><input type="checkbox" name="activity-type" value="Swim"> Swim</label><br>
         </div>
-            <!-- Add more activity types as needed -->
-        </select><br>
 
         <label for="start-date">Start Date:</label>
         <input type="date" id="start-date" name="start-date" required>
@@ -53,34 +54,23 @@
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date" name="end-date" required>
 
-        <button type="submit">Create Challenge</button>
+        <button type="submit" class="btn-primary">Create Challenge</button>
       </form>
-    <h2>Recent Activities</h2>
-    <button id="refresh-activities">Refresh Activities</button>
-    <ul id="activities-list"></ul>
+    </section>
+    
+    <section class="activities-section">
+      <h2>Recent Activities</h2>
+      <button id="refresh-activities" class="btn-secondary">Refresh Activities</button>
+      <ul id="activities-list"></ul>
+    </section>
 
-    <button id="logout-button">Log out of Strava</button>
-
-    <!-- Include the main JavaScript file -->
-    <script src="dashboard.js"></script>
-
-    <!-- Register the service worker -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/serviceWorker.js')
-        .then(registration => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch(error => {
-          console.log('Service Worker registration failed:', error);
-        });
-      }
-    </script>
+    <button id="logout-button" class="btn-primary">Log out of Strava</button>
   </div>
   
   <footer id="footer">
     <img src="footer_img.png" alt="Footer Image" class="footer-image" />
   </footer>
   
+  <script src="dashboard.js"></script>
 </body>
 </html>
