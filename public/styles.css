@@ -342,7 +342,7 @@ body {
     margin-bottom: 10px;
 }
 
-#challenge-date, #challenge-teamstate, #challenge-details {
+#challenge-name, #challenge-date, #challenge-teamstate, #challenge-details {
     border: none;
     margin: 10px;
     font-style: normal;
