@@ -139,7 +139,7 @@ if (challengeForm) {
 
 async function fetchActivities(token) {
   console.log('Fetching new activities from Strava');
-  const response = await fetch('https://www.strava.com/api/v3/athlete/activities', {
+  const response = await fetch('https://www.strava.com/api/v3/athlete/activities/?per_page=200&page=1', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
