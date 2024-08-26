@@ -336,6 +336,8 @@ body {
 }
 
 .profile-photo-l {
+    border-radius: 50%;
+    transition: width 0.3s, height 0.3s, margin-right 0.3s;
     width: 40px;
     height: 40px;
     margin-right: 10px;
