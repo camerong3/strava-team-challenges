@@ -421,6 +421,10 @@ body {
     display: block;
     margin-bottom: 5px;
 }
+
+#leaderboard-list {
+    list-style-type: decimal;
+}
   
 /* Style for the activities list */
 .activities-list {
