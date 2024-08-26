@@ -387,6 +387,8 @@ body {
     margin-bottom: 10px;
     border: none;
     margin-left: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .leaderboard-item {
@@ -418,7 +420,7 @@ body {
 /* Style for the participant's name */
 .leaderboard-name {
     font-weight: normal;
-    font-size: 0.8em;
+    font-size: 1.2em;
     display: block;
 }
 
