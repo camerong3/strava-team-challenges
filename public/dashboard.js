@@ -218,6 +218,7 @@ function displayActivities(activities) {
   } else {
     console.warn('Element with id "activities-list" not found on this page.');
   }
+  updateLastRefreshedTime();  // Update the last refreshed time
 }
 
 async function uploadActivities(userId, activities) {
