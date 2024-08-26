@@ -333,6 +333,7 @@ body {
 /* Style for the leaderboard items */
 #content-leaderboard header {
     background-color: #fc4c02;
+    height: 80px;
 }
 
 .profile-photo-l {
