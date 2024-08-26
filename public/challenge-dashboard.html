@@ -13,8 +13,9 @@
     </header>
 
     <section>
-        <h2>Leaderboard</h2>
         <p id="challenge-details"></p>
+
+        <h2>Leaderboard</h2>
         <ul id="leaderboard" class="leaderboard-list"></ul>
         <!-- Leaderboard entries will be dynamically inserted here -->
         
@@ -47,7 +48,7 @@
     
             // Display challenge name and details
             document.getElementById('challenge-name').textContent = challenge.name;
-            document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityType} - ${challenge.mode}`;
+            document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityTypes} - ${challenge.mode}`;
     
             // Fetch and display leaderboard
             displayLeaderboard(challengeId);

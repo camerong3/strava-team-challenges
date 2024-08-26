@@ -166,7 +166,7 @@ async function fetchActivities(token) {
 
   let allActivities = [];
   let page = 1;
-  const perPage = 100; // Maximum allowed per page is 200
+  const perPage = 200; // Maximum allowed per page is 200
 
   while (true) {
     const response = await fetch(`https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${perPage}`, {
