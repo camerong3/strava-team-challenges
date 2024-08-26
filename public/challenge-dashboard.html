@@ -69,24 +69,28 @@
     
             // Display challenge name and details
             document.getElementById('challenge-name-l').textContent = `Challenge: ${challenge.name}`;
-
+            
+            // Create Date objects from the challenge start and end dates
+            const start = new Date(challenge.startDate);
+            const end = new Date(challenge.endDate);
             // Start and End Dates (shortened) placed on the top right
-            const startDate = new Date(challenge.startDate).toLocaleDateString(undefined, {
-              month: 'numeric',
+            const startDate = start.toLocaleDateString(undefined, {
+              month: 'long',
               day: 'numeric',
-              year: '2-digit',
+              year: (start.getFullYear() !== end.getFullYear() ? 'numeric' : 'none') // Omit year if same
             });
-            const endDate = new Date(challenge.endDate).toLocaleDateString(undefined, {
-              month: 'numeric',
+            const endDate = end.toLocaleDateString(undefined, {
+              month: 'long',
               day: 'numeric',
-              year: '2-digit',
+              year: 'numeric',
             });
+            
             const dateRange = document.createElement('span');
             document.getElementById('challenge-date-l').textContent = `${startDate} - ${endDate}`;
-            document.getElementById('challenge-teamstate-l').textContent = `${challenge.mode}`;
-            document.getElementById('challenge-type-l').textContent = `Most Activity - ${challenge.type}`;
-            document.getElementById('challenge-details-l').textContent = `Qualifying Activities: ${challenge.activityTypes}`;
-    
+            document.getElementById('challenge-teamstate-l').textContent = `${challenge.mode.charAt(0).toUpperCase()}${challenge.mode.slice(1)}`;
+            document.getElementById('challenge-type-l').textContent = `Most Activity - ${challenge.type.charAt(0).toUpperCase()}${challenge.type.slice(1)}`;
+            document.getElementById('challenge-details-l').textContent = `Qualifying Activities: ${challenge.activityTypes.replace(/,/g, ', ')}`;
+
             // Fetch and display leaderboard
             displayLeaderboard(challengeId);
         } catch (error) {
