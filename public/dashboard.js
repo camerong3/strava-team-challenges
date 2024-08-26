@@ -35,18 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateLastRefreshedTime() {
-    const now = new Date();
-    const formattedTime = now.toLocaleString('en-US', {
-      weekday: 'short', // e.g., "Mon"
-      month: 'short', // e.g., "Aug"
-      day: 'numeric', // e.g., "24"
-      year: 'numeric', // e.g., "2024"
-      hour: 'numeric', // e.g., "4"
-      minute: 'numeric', // e.g., "30"
-      second: 'numeric', // e.g., "45"
-      hour12: true // e.g., "4:30 PM"
-    });
-    document.getElementById('last-refreshed').textContent = `Last refreshed: ${formattedTime}`;
+    const cacheTime = localStorage.getItem('strava_activities_cache_time');
+  
+    if (cacheTime) {
+      const date = new Date(parseInt(cacheTime, 10));
+      const formattedTime = date.toLocaleString('en-US', {
+        weekday: 'short', // e.g., "Mon"
+        month: 'short', // e.g., "Aug"
+        day: 'numeric', // e.g., "24"
+        year: 'numeric', // e.g., "2024"
+        hour: 'numeric', // e.g., "4"
+        minute: 'numeric', // e.g., "30"
+        second: 'numeric', // e.g., "45"
+        hour12: true // e.g., "4:30 PM"
+      });
+      document.getElementById('last-refreshed').textContent = `Last refreshed: ${formattedTime}`;
+    } else {
+      document.getElementById('last-refreshed').textContent = `Last refreshed: never`;
+    }
   }
 
   // Add a button for the user to manually refresh data
