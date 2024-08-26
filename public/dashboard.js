@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fetch and display user groups
       fetchAndDisplayUserGroups(athlete.id);
+
+      updateLastRefreshedTime();  // Update the last refreshed time
     } else {
       // Redirect to login if no athlete data is found
       window.location.href = '/';
