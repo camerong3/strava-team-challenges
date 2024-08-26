@@ -369,6 +369,10 @@ body {
     font-size: 1em;
 }
 
+#challenge-name-l {
+    font-size: 1.2em;
+}
+
 #content-leaderboard h2 {
     color: black;
     margin-bottom: 10px;
