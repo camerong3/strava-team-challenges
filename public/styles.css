@@ -416,14 +416,18 @@ body {
 
 /* Style for the participant's name */
 .leaderboard-name {
-    font-weight: bold;
-    font-size: 1.2em;
+    font-weight: normal;
+    font-size: 0.8em;
     display: block;
-    margin-bottom: 5px;
 }
 
 #leaderboard-list {
     list-style-type: decimal;
+}
+
+#leaderboard-list ol {
+    list-style-type: decimal;
+    font-size: 1em;
 }
   
 /* Style for the activities list */
