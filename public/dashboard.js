@@ -35,21 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateLastRefreshedTime() {
-    const cacheTime = localStorage.getItem('strava_activities_cache_time');
-  
-    if (cacheTime) {
-      const date = new Date(parseInt(cacheTime, 10));
-      const formattedTime = date.toLocaleString('en-US', {
-        month: 'short', // e.g., "Aug"
-        day: 'numeric', // e.g., "24"
-        year: 'numeric', // e.g., "2024"
-        hour: 'numeric', // e.g., "4"
-        minute: 'numeric', // e.g., "30"
-        hour12: true // e.g., "4:30 PM"
-      });
-      document.getElementById('last-refreshed').textContent = `Last refreshed: ${formattedTime}`;
-    } else {
-      document.getElementById('last-refreshed').textContent = `Last refreshed: never`;
+    if (!window.location.pathname.includes('challenge-dashboard.html')) {
+      const cacheTime = localStorage.getItem('strava_activities_cache_time');
+    
+      if (cacheTime) {
+        const date = new Date(parseInt(cacheTime, 10));
+        const formattedTime = date.toLocaleString('en-US', {
+          weekday: 'short', // e.g., "Mon"
+          month: 'short', // e.g., "Aug"
+          day: 'numeric', // e.g., "24"
+          year: 'numeric', // e.g., "2024"
+          hour: 'numeric', // e.g., "4"
+          minute: 'numeric', // e.g., "30"
+          second: 'numeric', // e.g., "45"
+          hour12: true // e.g., "4:30 PM"
+        });
+        document.getElementById('last-refreshed').textContent = `Last refreshed: ${formattedTime}`;
+      } else {
+        document.getElementById('last-refreshed').textContent = `Last refreshed: never`;
+      }
     }
   }
 
@@ -386,22 +390,24 @@ async function fetchAndDisplayUserGroups(userId) {
 }
 
 // Scroll event handling for header
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('.header');
-  const content = document.getElementById('content');
-  const initialHeight = header.offsetHeight;
-  const minHeight = 80; // The height after it shrinks completely
+if (!window.location.pathname.includes('challenge-dashboard.html')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    const content = document.getElementById('content');
+    const initialHeight = header.offsetHeight;
+    const minHeight = 80; // The height after it shrinks completely
 
-  window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const scrollThreshold = initialHeight - minHeight;
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const scrollThreshold = initialHeight - minHeight;
 
-      if (scrollY > scrollThreshold) {
-          header.classList.add('scrolled');
-          content.classList.add('with-scrolled-header');
-      } else {
-          header.classList.remove('scrolled');
-          content.classList.remove('with-scrolled-header');
-      }
+        if (scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+            content.classList.add('with-scrolled-header');
+        } else {
+            header.classList.remove('scrolled');
+            content.classList.remove('with-scrolled-header');
+        }
+    });
   });
-});
+}
