@@ -6,21 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const cacheTime = localStorage.getItem('strava_activities_cache_time');
   const cacheDuration = 1000 * 60 * 60 * 24; // Cache for 24 hours
 
-  if (!window.location.pathname.includes('challenge-dashboard.html')) {
-    if (athlete) {
-      document.getElementById('athlete-name').textContent = `${athlete.firstname} ${athlete.lastname}`;
-      document.getElementById('athlete-photo').src = athlete.profile;
-      document.getElementById('athlete-city').textContent = athlete.city;
-      document.getElementById('athlete-state').textContent = athlete.state;
+  if (athlete) {
+    document.getElementById('athlete-name').textContent = `${athlete.firstname} ${athlete.lastname}`;
+    document.getElementById('athlete-photo').src = athlete.profile;
+    document.getElementById('athlete-city').textContent = athlete.city;
+    document.getElementById('athlete-state').textContent = athlete.state;
 
-      // Fetch and display user groups
-      fetchAndDisplayUserGroups(athlete.id);
+    // Fetch and display user groups
+    fetchAndDisplayUserGroups(athlete.id);
 
-      updateLastRefreshedTime();  // Update the last refreshed time
-    } else {
-      // Redirect to login if no athlete data is found
-      window.location.href = '/';
-    }
+    updateLastRefreshedTime();  // Update the last refreshed time
+  } else {
+    // Redirect to login if no athlete data is found
+    window.location.href = '/';
   }
 
   if (cacheTime && (Date.now() - cacheTime < cacheDuration)) {
