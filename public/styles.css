@@ -423,11 +423,13 @@ body {
 
 #leaderboard-list {
     list-style-type: decimal;
+    margin-right: 10px;
 }
 
 #leaderboard-list ol {
     list-style-type: decimal;
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-right: 10px;
 }
   
 /* Style for the activities list */
