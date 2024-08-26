@@ -342,9 +342,17 @@ body {
     margin-bottom: 10px;
 }
 
-#challenge-date, #challenge-teamstate, #challenge-type, #challenge-details {
+#challenge-date, #challenge-teamstate, #challenge-details {
     border: none;
     margin: 10px;
+    font-style: normal;
+    font-size: 1em;
+}
+
+#challenge-type {
+    border: none;
+    font-style: normal;
+    font-size: 1em;
 }
 
 #content-leaderboard h2 {
