@@ -96,7 +96,7 @@
             document.getElementById('challenge-date-l').textContent = `${startDate} - ${endDate}`;
             document.getElementById('challenge-teamstate-l').textContent = `${challenge.mode.charAt(0).toUpperCase()}${challenge.mode.slice(1)}`;
             document.getElementById('challenge-type-l').textContent = `Most Activity - ${challenge.type.charAt(0).toUpperCase()}${challenge.type.slice(1)}`;
-            document.getElementById('challenge-details-l').textContent = `Qualifying Activities: ${challenge.activityTypes.replace(/,/g, ', ')}`;
+            document.getElementById('challenge-details-l').textContent = `Qualifying Activities: ${challenge.activityTypes.join(', ')}`;
 
             // Fetch and display leaderboard
             displayLeaderboard(challengeId);
