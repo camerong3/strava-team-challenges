@@ -332,7 +332,15 @@ body {
 
 /* Style for the leaderboard items */
 #content-leaderboard header {
-    background-color: #fc4c02;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fc4c02; /* Strava's orange color */
+    color: white;
+    position: relative;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
     height: 80px;
 }
 
