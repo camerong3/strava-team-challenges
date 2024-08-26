@@ -229,7 +229,7 @@ body {
     border: 1px solid #ccc;
 }
   
-.btn-primary {
+.btn-submit {
     background-color: #fc4c02;
     color: white;
     padding: 10px 15px;
@@ -241,12 +241,13 @@ body {
     font-size: 1em;
 }
   
-.btn-primary:hover {
+.btn-submit:hover {
     background-color: #e04800;
 }
   
 /* Activities Section */
-#refresh-activites {
+#btn-refresh {
+    width: 20%;
     background-color: #ddd;
     color: #333;
     padding: 10px 15px;
@@ -257,7 +258,7 @@ body {
     font-size: 1em;
 }
   
-#refresh-activites:hover {
+#btn-refresh:hover {
     background-color: #ccc;
 }
 
