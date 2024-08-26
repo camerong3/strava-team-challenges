@@ -341,7 +341,10 @@ body {
     position: relative;
     z-index: 100;
     transition: all 0.3s ease-in-out;
-    height: 80px;
+}
+
+.profile-details-l {
+    display: none;
 }
 
 .profile-photo-l {
