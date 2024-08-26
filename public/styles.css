@@ -335,6 +335,12 @@ body {
     background-color: #fc4c02;
 }
 
+.profile-photo-l {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
 #content-leaderboard h1 {
     color: white;
     border: none;
@@ -342,15 +348,9 @@ body {
     margin-bottom: 10px;
 }
 
-#challenge-name-l, #challenge-date-l, #challenge-teamstate-l, #challenge-details-l {
+#challenge-name-l, #challenge-type-l, #challenge-date-l, #challenge-teamstate-l, #challenge-details-l {
     border: none;
     margin: 10px;
-    font-style: normal;
-    font-size: 1em;
-}
-
-#challenge-type-l {
-    border: none;
     font-style: normal;
     font-size: 1em;
 }
