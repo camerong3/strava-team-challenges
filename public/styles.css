@@ -247,7 +247,7 @@ body {
   
 /* Activities Section */
 #btn-refresh {
-    width: 20%;
+    width: 30%;
     background-color: #ddd;
     color: #333;
     padding: 10px 15px;
@@ -264,6 +264,11 @@ body {
 
 .activities-section {
     margin: 20px;
+}
+
+.activities-section p {
+    text-align: right;
+    font-style: italic;
 }
 
 .activities-header {
