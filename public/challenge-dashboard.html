@@ -73,18 +73,25 @@
             // Create Date objects from the challenge start and end dates
             const start = new Date(challenge.startDate);
             const end = new Date(challenge.endDate);
-            // Start and End Dates (shortened) placed on the top right
-            const startDate = start.toLocaleDateString(undefined, {
+            // Determine the formatting options based on whether the years are the same
+            const startOptions = {
               month: 'long',
               day: 'numeric',
-              year: (start.getFullYear() !== end.getFullYear() ? 'numeric' : 'none') // Omit year if same
-            });
-            const endDate = end.toLocaleDateString(undefined, {
+            };
+            const endOptions = {
               month: 'long',
               day: 'numeric',
-              year: 'numeric',
-            });
-            
+              year: 'numeric'
+            };
+            // If years are different, include the year in the start date as well
+            if (start.getFullYear() !== end.getFullYear()) {
+              startOptions.year = 'numeric';
+            }
+
+            // Format start and end dates
+            const startDate = start.toLocaleDateString(undefined, startOptions);
+            const endDate = end.toLocaleDateString(undefined, endOptions);
+
             const dateRange = document.createElement('span');
             document.getElementById('challenge-date-l').textContent = `${startDate} - ${endDate}`;
             document.getElementById('challenge-teamstate-l').textContent = `${challenge.mode.charAt(0).toUpperCase()}${challenge.mode.slice(1)}`;
