@@ -13,6 +13,9 @@
     </header>
 
     <section>
+        <h3 id="challenge-date">No Date Range Found</h1>
+        <h5 id="challenge-teamstate"></h5>
+        <h4 id="challenge-type">Most Activity - </h1>
         <p id="challenge-details"></p>
 
         <h2>Leaderboard</h2>
@@ -48,7 +51,23 @@
     
             // Display challenge name and details
             document.getElementById('challenge-name').textContent = challenge.name;
-            document.getElementById('challenge-details').textContent = `${challenge.type} - ${challenge.activityTypes} - ${challenge.mode}`;
+
+            // Start and End Dates (shortened) placed on the top right
+            const startDate = new Date(groupData.startDate).toLocaleDateString(undefined, {
+              month: 'numeric',
+              day: 'numeric',
+              year: '2-digit',
+            });
+            const endDate = new Date(groupData.endDate).toLocaleDateString(undefined, {
+              month: 'numeric',
+              day: 'numeric',
+              year: '2-digit',
+            });
+            const dateRange = document.createElement('span');
+            document.getElementById('challenge-date').textContent = `${startDate} - ${endDate}`;
+            document.getElementById('challenge-teamstate').textContent = `${challenge.mode}`;
+            document.getElementById('challenge-type').textContent = `Most Activity - ${challenge.type}`;
+            document.getElementById('challenge-details').textContent = `Qualifying Activities: ${challenge.activityTypes}`;
     
             // Fetch and display leaderboard
             displayLeaderboard(challengeId);
