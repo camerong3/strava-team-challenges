@@ -139,17 +139,34 @@ if (challengeForm) {
 
 async function fetchActivities(token) {
   console.log('Fetching new activities from Strava');
-  const response = await fetch('https://www.strava.com/api/v3/athlete/activities/?per_page=200&page=1', {
-    headers: {
-      'Authorization': `Bearer ${token}`
+
+  let allActivities = [];
+  let page = 1;
+  const perPage = 100; // Maximum allowed per page is 200
+
+  while (true) {
+    const response = await fetch(`https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${perPage}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    const activities = await response.json();
+
+    if (activities.length === 0) {
+      break; // Exit loop when no more activities are returned
     }
-  });
-  const activities = await response.json();
-  // Cache the activities and the time they were fetched
-  localStorage.setItem('strava_activities', JSON.stringify(activities));
+
+    allActivities = allActivities.concat(activities);
+    page++;
+  }
+
+  // Cache all activities and the time they were fetched
+  localStorage.setItem('strava_activities', JSON.stringify(allActivities));
   localStorage.setItem('strava_activities_cache_time', Date.now());
-  displayActivities(activities);
-  return activities;
+
+  displayActivities(allActivities);
+  return allActivities;
 }
 
 function displayActivities(activities) {
