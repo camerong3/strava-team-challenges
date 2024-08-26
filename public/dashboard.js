@@ -358,11 +358,13 @@ async function fetchAndDisplayUserGroups(userId) {
 
         // Start and End Dates (shortened) placed on the top right
         const startDate = new Date(groupData.startDate).toLocaleDateString(undefined, {
+          timeZone: 'UTC',
           month: 'numeric',
           day: 'numeric',
           year: '2-digit',
         });
         const endDate = new Date(groupData.endDate).toLocaleDateString(undefined, {
+          timeZone: 'UTC',
           month: 'numeric',
           day: 'numeric',
           year: '2-digit',

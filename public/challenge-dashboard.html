@@ -75,10 +75,12 @@
             const end = new Date(challenge.endDate);
             // Determine the formatting options based on whether the years are the same
             const startOptions = {
+              timeZone: 'UTC',
               month: 'long',
               day: 'numeric',
             };
             const endOptions = {
+              timeZone: 'UTC',
               month: 'long',
               day: 'numeric',
               year: 'numeric'
