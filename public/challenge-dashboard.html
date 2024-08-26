@@ -9,20 +9,29 @@
 <body>
   <div id="content-leaderboard">
     <header>
-        <h1 id="challenge-name">Challenge Dashboard</h1>
+      <div class="profile-container">
+        <img id="athlete-photo" src="" alt="Profile Photo" class="profile-photo">
+        <div class="profile-details">
+          <h1 id="athlete-name"></h1>
+          <p id="athlete-city"></p>
+          <p id="athlete-state"></p>
+        </div>
+        <button id="logout-button" class="btn-logout">Log Out</button>
+      </div>
     </header>
 
     <section>
-        <h3 id="challenge-date">No Date Range Found</h1>
-        <h5 id="challenge-teamstate"></h5>
-        <h4 id="challenge-type">Most Activity - </h1>
-        <p id="challenge-details"></p>
+      <h1 id="challenge-name">Challenge Dashboard</h1>
+      <h3 id="challenge-date">No Date Range Found</h1>
+      <h5 id="challenge-teamstate"></h5>
+      <h4 id="challenge-type">Most Activity - </h1>
+      <p id="challenge-details"></p>
 
-        <h2>Leaderboard</h2>
-        <ul id="leaderboard" class="leaderboard-list"></ul>
-        <!-- Leaderboard entries will be dynamically inserted here -->
-        
-        </ul>
+      <h2>Leaderboard</h2>
+      <ul id="leaderboard" class="leaderboard-list"></ul>
+      <!-- Leaderboard entries will be dynamically inserted here -->
+      
+      </ul>
     </section>
 
     <footer>
