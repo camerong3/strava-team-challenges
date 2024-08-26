@@ -20,11 +20,11 @@
     </header>
 
     <section>
-      <p id="challenge-name">Challenge Dashboard</h1>
-      <p id="challenge-date">No Date Range Found</h1>
-      <p id="challenge-teamstate"></h5>
-      <p id="challenge-type">Most Activity - </h1>
-      <p id="challenge-details"></p>
+      <p id="challenge-name-l">Challenge Dashboard</h1>
+      <p id="challenge-date-l">No Date Range Found</h1>
+      <p id="challenge-teamstate-l"></h5>
+      <p id="challenge-type-l">Most Activity - </h1>
+      <p id="challenge-details-l"></p>
 
       <h2>Leaderboard</h2>
       <ul id="leaderboard" class="leaderboard-list"></ul>
@@ -66,7 +66,7 @@
             const challenge = await response.json();
     
             // Display challenge name and details
-            document.getElementById('challenge-name').textContent = challenge.name;
+            document.getElementById('challenge-name-l').textContent = challenge.name;
 
             // Start and End Dates (shortened) placed on the top right
             const startDate = new Date(challenge.startDate).toLocaleDateString(undefined, {
@@ -80,10 +80,10 @@
               year: '2-digit',
             });
             const dateRange = document.createElement('span');
-            document.getElementById('challenge-date').textContent = `${startDate} - ${endDate}`;
-            document.getElementById('challenge-teamstate').textContent = `${challenge.mode}`;
-            document.getElementById('challenge-type').textContent = `Most Activity - ${challenge.type}`;
-            document.getElementById('challenge-details').textContent = `Qualifying Activities: ${challenge.activityTypes}`;
+            document.getElementById('challenge-date-l').textContent = `${startDate} - ${endDate}`;
+            document.getElementById('challenge-teamstate-l').textContent = `${challenge.mode}`;
+            document.getElementById('challenge-type-l').textContent = `Most Activity - ${challenge.type}`;
+            document.getElementById('challenge-details-l').textContent = `Qualifying Activities: ${challenge.activityTypes}`;
     
             // Fetch and display leaderboard
             displayLeaderboard(challengeId);

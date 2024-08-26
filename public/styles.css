@@ -342,14 +342,14 @@ body {
     margin-bottom: 10px;
 }
 
-#challenge-name, #challenge-date, #challenge-teamstate, #challenge-details {
+#challenge-name-l, #challenge-date-l, #challenge-teamstate-l, #challenge-details-l {
     border: none;
     margin: 10px;
     font-style: normal;
     font-size: 1em;
 }
 
-#challenge-type {
+#challenge-type-l {
     border: none;
     font-style: normal;
     font-size: 1em;
