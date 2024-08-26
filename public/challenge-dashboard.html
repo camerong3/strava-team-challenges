@@ -22,12 +22,12 @@
     </header>
 
     <section>
-      <p id="challenge-name-l">Challenge Dashboard</h1>
-      <p id="challenge-date-l">No Date Range Found</h1>
-      <p id="challenge-teamstate-l"></h5>
-      <p id="challenge-type-l">Most Activity - </h1>
-      <p id="challenge-details-l"></p>
-
+      <div class="challenge-detail-container">
+        <p id="challenge-date-l">No Date Range Found</h1>
+        <p id="challenge-teamstate-l"></h5>
+        <p id="challenge-type-l">Most Activity - </h1>
+        <p id="challenge-details-l"></p>
+      </div>
       <h2>Leaderboard</h2>
       <ul id="leaderboard" class="leaderboard-list"></ul>
       <!-- Leaderboard entries will be dynamically inserted here -->
@@ -68,7 +68,7 @@
             const challenge = await response.json();
     
             // Display challenge name and details
-            document.getElementById('challenge-name-l').textContent = challenge.name;
+            document.getElementById('challenge-name-l').textContent = `Challenge: ${challenge.name}`;
 
             // Start and End Dates (shortened) placed on the top right
             const startDate = new Date(challenge.startDate).toLocaleDateString(undefined, {
