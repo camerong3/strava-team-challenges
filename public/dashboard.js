@@ -197,26 +197,45 @@ function displayActivities(activities) {
   const activitiesList = document.getElementById('activities-list');
   
   if (activitiesList) {  // Check if the element exists
-    activitiesList.innerHTML = '';
-
-    activities.forEach(activity => {
-      const distanceInMiles = (activity.distance / 1609.34).toFixed(2); // Convert meters to miles and round to 2 decimal places
-      
-      // Create a list item
+    activitiesList.innerHTML = ''; // Clear any existing content
+    
+    // Display only the first 10 activities initially
+    const initialActivities = activities.slice(0, 10);
+    initialActivities.forEach(activity => {
       const listItem = document.createElement('li');
-
-      // Create an anchor tag to link to the activity on Strava
       const activityLink = document.createElement('a');
       activityLink.href = `https://www.strava.com/activities/${activity.id}`;
-      activityLink.textContent = `${activity.name} - ${distanceInMiles} miles`;
-      activityLink.target = '_blank'; // Open in a new tab
-
-      // Append the anchor tag to the list item
+      activityLink.textContent = `${activity.name} - ${(activity.distance / 1609.34).toFixed(2)} miles`;
+      activityLink.target = '_blank';
       listItem.appendChild(activityLink);
-
-      // Append the list item to the activities list
       activitiesList.appendChild(listItem);
     });
+    
+    // Check if there are more activities to show
+    if (activities.length > 10) {
+      // Create a "Show More" button
+      const showMoreButton = document.createElement('button');
+      showMoreButton.textContent = 'Show More';
+      showMoreButton.className = 'btn-show-more';
+      activitiesList.appendChild(showMoreButton);
+
+      // Add event listener to load the remaining activities
+      showMoreButton.addEventListener('click', () => {
+        const remainingActivities = activities.slice(10);
+        remainingActivities.forEach(activity => {
+          const listItem = document.createElement('li');
+          const activityLink = document.createElement('a');
+          activityLink.href = `https://www.strava.com/activities/${activity.id}`;
+          activityLink.textContent = `${activity.name} - ${(activity.distance / 1609.34).toFixed(2)} miles`;
+          activityLink.target = '_blank';
+          listItem.appendChild(activityLink);
+          activitiesList.appendChild(listItem);
+        });
+
+        // Remove the "Show More" button after all activities are displayed
+        showMoreButton.remove();
+      });
+    }
   } else {
     console.warn('Element with id "activities-list" not found on this page.');
   }
