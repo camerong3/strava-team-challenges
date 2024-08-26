@@ -246,7 +246,7 @@ body {
 }
   
 /* Activities Section */
-.btn-secondary {
+#refresh-activites {
     background-color: #ddd;
     color: #333;
     padding: 10px 15px;
@@ -257,11 +257,10 @@ body {
     font-size: 1em;
 }
   
-.btn-secondary:hover {
+#refresh-activites:hover {
     background-color: #ccc;
 }
 
-/* Activities Section */
 .activities-section {
     margin: 20px;
 }

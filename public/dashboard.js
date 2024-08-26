@@ -34,6 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function updateLastRefreshedTime() {
+    const now = new Date();
+    const formattedTime = now.toLocaleString('en-US', {
+      weekday: 'short', // e.g., "Mon"
+      month: 'short', // e.g., "Aug"
+      day: 'numeric', // e.g., "24"
+      year: 'numeric', // e.g., "2024"
+      hour: 'numeric', // e.g., "4"
+      minute: 'numeric', // e.g., "30"
+      second: 'numeric', // e.g., "45"
+      hour12: true // e.g., "4:30 PM"
+    });
+    document.getElementById('last-refreshed').textContent = `Last refreshed: ${formattedTime}`;
+  }
+
   // Add a button for the user to manually refresh data
   const refreshButton = document.getElementById('refresh-activities');
   if (refreshButton) {
@@ -41,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Manual refresh triggered');
       fetchActivities(token).then(activities => {
         uploadActivities(athlete.id, activities);  // Force upload new activities to backend
+        updateLastRefreshedTime();  // Update the last refreshed time
       });
     });
   } else {
