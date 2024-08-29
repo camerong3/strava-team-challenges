@@ -177,6 +177,7 @@ body {
   
   .group-item p {
     margin: 5px 0;
+    margin-bottom: 0px;
     color: #666;
   }  
 
